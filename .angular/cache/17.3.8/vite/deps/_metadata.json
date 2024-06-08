@@ -1,0 +1,76 @@
+{
+  "hash": "62a581c0",
+  "configHash": "03ccbd6c",
+  "lockfileHash": "29753961",
+  "browserHash": "a9b7aee6",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "55cfe148",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "ed33385b",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "fb0bbdba",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "734f2bd0",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "e32191cd",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "9c782a5e",
+      "needsInterop": false
+    },
+    "rxjs/internal/observable/of": {
+      "src": "../../../../../node_modules/rxjs/dist/esm5/internal/observable/of.js",
+      "file": "rxjs_internal_observable_of.js",
+      "fileHash": "c74a0ac7",
+      "needsInterop": false
+    },
+    "rxjs": {
+      "src": "../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "d75e7fcd",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-3K2QCUHA": {
+      "file": "chunk-3K2QCUHA.js"
+    },
+    "chunk-FDWKVXEK": {
+      "file": "chunk-FDWKVXEK.js"
+    },
+    "chunk-2JT53NAW": {
+      "file": "chunk-2JT53NAW.js"
+    },
+    "chunk-RFIKCJEH": {
+      "file": "chunk-RFIKCJEH.js"
+    },
+    "chunk-JJPE22SW": {
+      "file": "chunk-JJPE22SW.js"
+    },
+    "chunk-TDWUSMYS": {
+      "file": "chunk-TDWUSMYS.js"
+    }
+  }
+}

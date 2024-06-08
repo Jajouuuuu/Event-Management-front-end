@@ -1,0 +1,12 @@
+<form (ngSubmit)="login()">
+    <label for="username">Nom d'utilisateur:</label>
+    <input type="text" id="username" name="username" [(ngModel)]="username">
+  
+    <label for="password">Mot de passe:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password">
+  
+    <button type="submit">Connexion</button>
+  </form>
+  
+  <div *ngIf="loginFailed" class="error-message">Identifiant ou mot de passe incorrect.</div>
+  
