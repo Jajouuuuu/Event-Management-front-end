@@ -1,16 +1,20 @@
 import { Injectable } from "@angular/core";
 import { BaseService } from "./base.service";
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { User } from "../data/users";
-import { Observable } from "rxjs";
+import { catchError, map, Observable, of, tap, throwError } from "rxjs";
+import { Router } from "@angular/router";
+import * as CryptoJS from 'crypto-js';
+
+
+
 
 @Injectable()
 export class UsersService extends BaseService {
 
     private usersUrl = `${this.environmentUrl}users`;
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient) {
         super();
     }
 
@@ -18,17 +22,25 @@ export class UsersService extends BaseService {
         return this.http.get<User>(`${this.usersUrl}/byname/${username}`);
     }
 
-    loginUser(username: string, password: string): Observable<boolean> {
-        return new Observable<boolean>((observer) => {
-            this.getUserByUsername(username).subscribe((user: User) => {
-                if (user && user.password === password) {
-                    observer.next(true); // Connexion réussie
-                } else {
-                    observer.next(false); // Connexion échouée
-                }
-            }, (error) => {
-                observer.next(false); // Connexion échouée
-            });
+    createUser(user: User): Observable<User> {
+        return this.http.post<User>(this.usersUrl, user);
+      }
+
+    login(username: string, password: string): Observable<any> {
+        const body = { username, password };
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
         });
-    }
+        return this.http.post(`${this.usersUrl}/login`, body, { headers, responseType: 'text' }).pipe(
+            catchError((error: HttpErrorResponse) => {
+              let errorMessage = 'Une erreur est survenue lors de la connexion.';
+              if (error.error) {
+                errorMessage = error.error;
+              }
+              return throwError(errorMessage);
+            })
+          );;
+      }
+
 }

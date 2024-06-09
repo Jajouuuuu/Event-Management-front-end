@@ -1,0 +1,4 @@
+<div *ngIf="events && events.length">
+    <app-event-list-item *ngFor="let event of events; index as i" [event]="event"></app-event-list-item>
+  </div>
+  
