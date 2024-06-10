@@ -10,6 +10,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { EventListItemComponent } from './components/event-list-item/event-list-item.component';
 import { EventService } from './services/event.service';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -18,13 +20,15 @@ import { EventService } from './services/event.service';
     SigninComponent, 
     SignUpComponent, 
     EventListComponent, 
-    EventListItemComponent,
+    EventListItemComponent, 
+    TopBarComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule, 
     HttpClientModule,
-    FormsModule,
+    RouterModule,
   ],
   providers: [
     UsersService,

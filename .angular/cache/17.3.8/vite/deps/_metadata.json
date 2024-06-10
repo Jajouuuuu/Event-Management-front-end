@@ -1,55 +1,55 @@
 {
-  "hash": "536af3e0",
+  "hash": "55ff3c5f",
   "configHash": "03ccbd6c",
-  "lockfileHash": "86c8f53b",
-  "browserHash": "43e22832",
+  "lockfileHash": "9671bf31",
+  "browserHash": "155dab3c",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "5007f259",
+      "fileHash": "28490c91",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "e6b5b852",
+      "fileHash": "d4cbe1a3",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "178429ab",
+      "fileHash": "e991d62d",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "77641a91",
+      "fileHash": "28ed22f3",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "5dca9663",
+      "fileHash": "6b28e7fb",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "1a4511d8",
+      "fileHash": "d914a927",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "7501950f",
+      "fileHash": "54bc2eb4",
       "needsInterop": false
     },
     "rxjs/internal/observable/of": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/internal/observable/of.js",
       "file": "rxjs_internal_observable_of.js",
-      "fileHash": "a5336ee5",
+      "fileHash": "c9a10144",
       "needsInterop": false
     }
   },

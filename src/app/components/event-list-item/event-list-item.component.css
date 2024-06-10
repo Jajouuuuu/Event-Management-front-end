@@ -1,0 +1,27 @@
+.event-card:hover {
+    background-color: #f8f9fa; /* Gris clair au survol */
+  }
+
+  .event-card {
+    border: none; /* Supprimer la bordure de la carte */
+  }
+  
+
+  
+  .card-title {
+    font-weight: bold; /* Police en gras pour le titre */
+  }
+  
+  .card-text {
+    line-height: 1.6; /* Espacement de ligne augmenté */
+  }
+  
+  .badge {
+    font-size: 0.8rem; /* Taille de police réduite pour les badges */
+  }
+
+  .event-image {
+    width: 100%; /* Définir la largeur de toutes les images à 100% */
+    height: 350px; /* Définir une hauteur fixe pour toutes les images */
+    object-fit: cover; /* Assurer que l'image couvre complètement la zone */
+  }
