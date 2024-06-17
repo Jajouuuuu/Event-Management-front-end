@@ -28,8 +28,14 @@ export class RegistrationService extends BaseService {
     });
   }
 
-  unregisterFromEvent(registrationId: string): Observable<any> {
+  unregisterFromEvent(registrationId: string, userId: string): Observable<any> {
     const url = `${this.registrationsUrl}/${registrationId}`;
-    return this.http.delete(url);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'userId': userId
+      })
+    };
+    return this.http.delete(url, options);
   }
 }

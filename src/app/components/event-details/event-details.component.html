@@ -1,26 +1,33 @@
-<div *ngIf="event">
-  <h2>{{ event.title }}</h2>
-  <p>{{ event.description }}</p>
-  <p>Date: {{ event.date }}</p>
-  <p>Time: {{ event.time }}</p>
-  <p>Location: {{ event.location }}</p>
-  <p>Category: {{ event.category.name }}</p>
-  <p>Created At: {{ event.createdAt }}</p>
-  <p>Created By: {{ event.createdBy.username }} ({{ event.createdBy.email }})</p>
-  <div *ngIf="event.image">
-    <img [src]="event.image.url" />
-  </div>
+  <app-top-bar></app-top-bar>
+  
+  <div *ngIf="event">
+      <h2>{{ event.title }}</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <img *ngIf="event.image" [src]="imageUrl" class="img-fluid rounded">
+        </div>
+        <div class="col-md-8">
+          <p>{{ event.description }}</p>
+          <p><strong>Date:</strong> {{ event.date }}</p>
+          <p><strong>Time:</strong> {{ event.time }}</p>
+          <p><strong>Location:</strong> {{ event.location }}</p>
+          <p><strong>Category:</strong> {{ event.category.name }}</p>
+          <p><strong>Created At:</strong> {{ event.createdAt }}</p>
+          <p><strong>Created By:</strong> {{ event.createdBy.username }} ({{ event.createdBy.email }})</p>
+        </div>
+      </div>
+    </div>
+      <h3>Registrations</h3>
+      <ul class="list-group">
+        <li *ngFor="let registration of registrations" class="list-group-item">
+          User ID: {{ registration.user.username }}
+          <button *ngIf="registration.user.id === userId" class="btn btn-danger btn-sm float-right" (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
+        </li>
+      </ul>
 
-  <h3>Registrations</h3>
-  <ul class="list-group mb-3">
-    <li *ngFor="let registration of registrations" class="list-group-item">
-      User ID: {{ registration.user.username }}
-      <button class="btn btn-danger btn-sm ml-2" (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
-    </li>
-  </ul>
+      <button *ngIf="!isRegistered" class="btn btn-success mt-3" (click)="registerForEvent()">Register for Event</button>
+      <div *ngIf="isRegistered" class="alert alert-success mt-3" role="alert">
+        You are registered for this event.
+      </div>
 
-  <button *ngIf="!isRegistered" class="btn btn-success" (click)="registerForEvent()">Register for Event</button>
-  <div *ngIf="isRegistered" class="alert alert-success mt-3" role="alert">
-    You are registered for this event.
-  </div>
-</div>
+
