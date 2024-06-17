@@ -12,6 +12,7 @@ import { EventListItemComponent } from './components/event-list-item/event-list-
 import { EventService } from './services/event.service';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { RouterModule } from '@angular/router';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { RouterModule } from '@angular/router';
     SignUpComponent, 
     EventListComponent, 
     EventListItemComponent, 
-    TopBarComponent,
+    EventDetailsComponent,
+    TopBarComponent, 
+    EventDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+<div *ngIf="event">
+  <h2>{{ event.title }}</h2>
+  <p>{{ event.description }}</p>
+  <p>Date: {{ event.date }}</p>
+  <p>Time: {{ event.time }}</p>
+  <p>Location: {{ event.location }}</p>
+  <p>Category: {{ event.category.name }}</p>
+  <p>Created At: {{ event.createdAt }}</p>
+  <p>Created By: {{ event.createdBy.username }} ({{ event.createdBy.email }})</p>
+  <div *ngIf="event.image">
+    <img [src]="event.image.url" />
+  </div>
+
+  <h3>Registrations</h3>
+  <ul class="list-group mb-3">
+    <li *ngFor="let registration of registrations" class="list-group-item">
+      User ID: {{ registration.user.username }}
+      <button class="btn btn-danger btn-sm ml-2" (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
+    </li>
+  </ul>
+
+  <button *ngIf="!isRegistered" class="btn btn-success" (click)="registerForEvent()">Register for Event</button>
+  <div *ngIf="isRegistered" class="alert alert-success mt-3" role="alert">
+    You are registered for this event.
+  </div>
+</div>

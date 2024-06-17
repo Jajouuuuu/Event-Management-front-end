@@ -4,7 +4,7 @@ export interface Event {
     id: string;
     title: string;
     description: string;
-    date: Date;
+    date: string;
     time: string; // Pourrait être un objet avec des propriétés heures et minutes si besoin
     location: string;
     category: {

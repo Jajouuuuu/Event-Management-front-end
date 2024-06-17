@@ -26,21 +26,22 @@ export class UsersService extends BaseService {
         return this.http.post<User>(this.usersUrl, user);
       }
 
-    login(username: string, password: string): Observable<any> {
+      login(username: string, password: string): Observable<any> {
         const body = { username, password };
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
-          'Accept': '*/*'
+          'Accept': 'application/json' 
         });
-        return this.http.post(`${this.usersUrl}/login`, body, { headers, responseType: 'text' }).pipe(
-            catchError((error: HttpErrorResponse) => {
-              let errorMessage = 'Une erreur est survenue lors de la connexion.';
-              if (error.error) {
-                errorMessage = error.error;
-              }
-              return throwError(errorMessage);
-            })
-          );;
+    
+        return this.http.post<any>(`${this.usersUrl}/login`, body, { headers }).pipe(
+          catchError((error: HttpErrorResponse) => {
+            let errorMessage = 'Une erreur est survenue lors de la connexion.';
+            if (error.error) {
+              errorMessage = error.error;
+            }
+            return throwError(errorMessage);
+          })
+        );
       }
 
 }
