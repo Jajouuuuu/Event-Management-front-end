@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '../../services/session-storage.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
@@ -11,6 +12,7 @@ import { SessionStorageService } from '../../services/session-storage.service';
 export class SigninComponent {
   username: string = '';
   password: string = '';
+
 
   constructor(private userService: UsersService, private router: Router, private sessionStorageService: SessionStorageService ) {}
 

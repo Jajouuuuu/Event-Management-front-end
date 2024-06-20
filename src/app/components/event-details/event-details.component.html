@@ -1,27 +1,49 @@
-  <app-top-bar></app-top-bar>
-  
-  <div *ngIf="event">
-      <h2>{{ event.title }}</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <img *ngIf="event.image" [src]="imageUrl" class="img-fluid rounded">
+<app-top-bar></app-top-bar>
+<div class="container mt-4" *ngIf="event">
+  <section class="py-3 py-md-5 py-xl-8 bg-light">
+    <div class="container">
+      <article>
+        <div class="card">
+          <div class="row g-0">
+            <div class="col-12 col-md-6 order-1 order-md-0 d-flex align-items-center">
+              <div class="card-body p-md-4 p-xl-6 p-xxl-9">
+                <div class="entry-header mb-3">
+                  <h2 class="card-title entry-title display-3 fw-bold mb-4 lh-1">
+                    <a class="link-dark text-decoration-none" href="#!">{{ event.title }}</a>
+                  </h2>
+                </div>
+                <p class="card-text entry-summary text-secondary mb-4">
+                  {{ event.description }}
+                </p>
+                <div class="entry-footer">
+                  <ul class="entry-meta list-unstyled d-flex align-items-center m-0">
+                    <li>
+                      <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                          <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                          <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                        <span class="ms-2 fs-7">{{ event.date }}</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 d-flex">
+              <img *ngIf="imageUrl" [src]="imageUrl" class="img-fluid rounded-end object-fit-cover" loading="lazy" alt="{{ event.title }}">
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <p>{{ event.description }}</p>
-          <p><strong>Date:</strong> {{ event.date }}</p>
-          <p><strong>Time:</strong> {{ event.time }}</p>
-          <p><strong>Location:</strong> {{ event.location }}</p>
-          <p><strong>Category:</strong> {{ event.category.name }}</p>
-          <p><strong>Created At:</strong> {{ event.createdAt }}</p>
-          <p><strong>Created By:</strong> {{ event.createdBy.username }} ({{ event.createdBy.email }})</p>
-        </div>
-      </div>
+      </article>
     </div>
+
+    <div class="container mt-4">
       <h3>Registrations</h3>
       <ul class="list-group">
-        <li *ngFor="let registration of registrations" class="list-group-item">
+        <li *ngFor="let registration of registrations" class="list-group-item d-flex justify-content-between align-items-center">
           User ID: {{ registration.user.username }}
-          <button *ngIf="registration.user.id === userId" class="btn btn-danger btn-sm float-right" (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
+          <button *ngIf="registration.user.id === userId" class="btn btn-danger btn-sm" (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
         </li>
       </ul>
 
@@ -29,5 +51,6 @@
       <div *ngIf="isRegistered" class="alert alert-success mt-3" role="alert">
         You are registered for this event.
       </div>
-
-
+    </div>
+  </section>
+</div>

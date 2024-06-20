@@ -1,13 +1,38 @@
-<form (ngSubmit)="signUp()">
-    <label for="username">Nom d'utilisateur:</label>
-    <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
-  
-    <label for="email">Adresse e-mail:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
-  
-    <label for="password">Mot de passe:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
-  
-    <button type="submit">S'inscrire</button>
-  </form>
-  
+<div class="container-fluid ps-md-0">
+  <div class="row g-0">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4">Create your account!</h3>
+
+              <!-- Sign Up Form -->
+              <form (ngSubmit)="signUp()">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username" [(ngModel)]="user.username" required>
+                  <label for="floatingUsername">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="name@example.com" [(ngModel)]="user.email" required>
+                  <label for="floatingEmail">Email address</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" [(ngModel)]="user.password" required>
+                  <label for="floatingPassword">Password</label>
+                </div>
+
+                <div class="d-grid">
+                  <button class="btn btn-lg btn-success btn-login text-uppercase fw-bold mb-2" type="submit">Sign up</button>
+                  <button class="btn btn-lg btn-outline-secondary btn-login text-uppercase fw-bold mb-2" routerLink="/sign-in">Sign in</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
