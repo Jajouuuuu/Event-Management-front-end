@@ -18,6 +18,10 @@ export class RegistrationService extends BaseService {
     return this.http.get<Registration[]>(`${this.registrationsUrl}/event/${eventId}`);
   }
 
+  getRegistrationsByUserId(userId: string): Observable<Registration[]> {
+    return this.http.get<Registration[]>(`${this.registrationsUrl}/user/${userId}`);
+  }
+
   registerForEvent(eventId: string, userId: string): Observable<any> {
     const url = `${this.registrationsUrl}`;
     const payload = { eventId, userId };

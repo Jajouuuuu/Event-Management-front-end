@@ -1,0 +1,25 @@
+<app-top-bar></app-top-bar>
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <h3>Ajouter un Feedback</h3>
+      <form (ngSubmit)="submitFeedback()">
+        <div class="form-group">
+          <label for="rating">Note</label>
+          <input type="number" class="form-control" id="rating" name="rating" [(ngModel)]="feedback.rating">
+        </div>
+        <div class="form-group">
+          <label for="comment">Commentaire</label>
+          <textarea class="form-control" id="comment" name="comment" [(ngModel)]="feedback.comment"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="eventId">ID de l'événement</label>
+          <input type="text" class="form-control" id="eventId" name="eventId" [(ngModel)]="feedback.event.id">
+        </div>
+        <div class="form-group">
+          <label for="userId">ID de l'utilisateur</label>
+          <input type="text" class="form-control" id="userId" name="userId" [(ngModel)]="feedback.user.id">
+        </div>
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+      </form>
+    </div>
+  </div>

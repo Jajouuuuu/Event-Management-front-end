@@ -28,7 +28,6 @@ export class SignUpComponent {
       },
       error => {
         console.error('Erreur lors de la création de l\'utilisateur:', error);
-        // Gérer l'erreur et informer l'utilisateur, si nécessaire
       }
     );
   }

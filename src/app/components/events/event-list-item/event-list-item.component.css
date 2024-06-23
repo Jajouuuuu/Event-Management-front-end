@@ -1,0 +1,38 @@
+.event-card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #ffffff;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-card .card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Arial Black', sans-serif;
+}
+
+.event-card .event-location {
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.event-card .event-image {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.event-card .badge {
+  font-size: 0.85rem;
+}
+
+.event-card .badge.rounded-pill {
+  background-color: #5f0388;
+  color: #fff;
+}

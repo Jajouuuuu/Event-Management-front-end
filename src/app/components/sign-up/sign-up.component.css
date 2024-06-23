@@ -1,24 +1,20 @@
-/* Login container */
 .login {
     min-height: 100vh;
-  }
+}
   
-  /* Background image */
-  .bg-image {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3i1WbG94v_n_SsKbAotmYfYWH3_mlyvFfFA&s');
-    background-size: cover;
-    background-position: center;
-  }
+.bg-image {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3i1WbG94v_n_SsKbAotmYfYWH3_mlyvFfFA&s');
+  background-size: cover;
+  background-position: center;
+}
   
-  /* Login heading */
-  .login-heading {
-    font-weight: 300;
-  }
+.login-heading {
+  font-weight: 300;
+}
   
-  /* Login button */
-  .btn-login {
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
-    padding: 0.75rem 1rem;
-  }
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
   

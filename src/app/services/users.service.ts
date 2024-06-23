@@ -19,11 +19,11 @@ export class UsersService extends BaseService {
     }
 
     getUserByUsername(username: string): Observable<User> {
-        return this.http.get<User>(`${this.usersUrl}/byname/${username}`);
+        return this.http.get<User>(`${this.usersUrl}/user/name/${username}`);
     }
 
     createUser(user: User): Observable<User> {
-        return this.http.post<User>(this.usersUrl, user);
+        return this.http.post<User>(`${this.usersUrl}/user`, user);
       }
 
       login(username: string, password: string): Observable<any> {
@@ -33,7 +33,7 @@ export class UsersService extends BaseService {
           'Accept': 'application/json' 
         });
     
-        return this.http.post<any>(`${this.usersUrl}/login`, body, { headers }).pipe(
+        return this.http.post<any>(`${this.usersUrl}/user/login`, body, { headers }).pipe(
           catchError((error: HttpErrorResponse) => {
             let errorMessage = 'Une erreur est survenue lors de la connexion.';
             if (error.error) {
@@ -44,4 +44,8 @@ export class UsersService extends BaseService {
         );
       }
 
+      getUserById(userId: string): Observable<User> {
+        return this.http.get<User>(`${this.usersUrl}/user/id/${userId}`);
+      }
+    
 }

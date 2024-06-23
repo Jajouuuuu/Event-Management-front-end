@@ -1,0 +1,13 @@
+
+  <app-top-bar></app-top-bar>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h3>Liste des Feedbacks</h3>
+      <div class="list-group">
+        <div *ngFor="let feedback of feedbacks" class="list-group-item mb-3">
+          <app-feedback-list-item [feedback]="feedback"></app-feedback-list-item>
+        </div>
+      </div>
+      <button class="btn btn-primary mt-3" (click)="navigateToCreateFeedback()">Ajouter un Feedback</button>
+    </div>
+  </div>

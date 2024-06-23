@@ -6,4 +6,5 @@ export interface User {
     createdAt: string;
   }
 
+  type UserNameOnly = Omit<User, 'password'>;
   

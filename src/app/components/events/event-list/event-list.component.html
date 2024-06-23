@@ -1,0 +1,23 @@
+<app-top-bar></app-top-bar>
+
+<div class="container-fluid my-2">
+  <div class="row mb-4" *ngIf="user">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <div>
+        <h2 class="title">Welcome on Event Core, {{ user.username }}!</h2>
+        <p class="lead">Find some events to attend.</p>
+      </div>
+      <button [routerLink]="['/create-event']" class="btn btn-custom btn-lg">
+        <i class="bi bi-plus-lg me-2"></i>New Event
+      </button>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <ng-container *ngFor="let event of events; index as i">
+      <div class="col">
+        <app-event-list-item [event]="event"></app-event-list-item>
+      </div>
+    </ng-container>
+  </div>
+</div>
