@@ -4,22 +4,21 @@ import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { Event } from "../data/event";
 
-
 @Injectable()
 export class EventService extends BaseService {
 
   private eventsUrl = `${this.environmentUrl}events`;
 
-   constructor(private http: HttpClient) {
-        super();
-    }
+  constructor(private http: HttpClient) {
+      super();
+  }
 
   getEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.eventsUrl);
   }
 
   getEventById(eventId: string): Observable<Event> {
-    return this.http.get<Event>(`${this.environmentUrl}events/${eventId}/event`);
+    return this.http.get<Event>(`${this.environmentUrl}events/event/${eventId}`);
   }
 
   createEvent(eventDTO: any, file: File): Observable<any> {
@@ -31,5 +30,15 @@ export class EventService extends BaseService {
     headers.append('Content-Type', 'multipart/form-data');
 
     return this.http.post(this.eventsUrl, formData, { headers });
+  }
+
+  // Nouveau endpoint pour récupérer les événements futurs par utilisateur
+  getFutureEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.eventsUrl}/future`);
+  }
+
+  // Nouveau endpoint pour récupérer les événements passés par utilisateur
+  getPastEventsByUserId(userId: string): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.eventsUrl}/past/${userId}`);
   }
 }

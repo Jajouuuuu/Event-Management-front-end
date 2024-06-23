@@ -7,7 +7,7 @@ import { UsersService } from './services/users.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { EventListComponent } from './components/events/event-list/event-list.component';
+import { FuturEventListComponent } from './components/events/future-event-list/event-list.component';
 import { EventListItemComponent } from './components/events/event-list-item/event-list-item.component';
 import { EventService } from './services/event.service';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
@@ -25,6 +25,7 @@ import { RegistrationService } from './services/registration.service';
 import { BaseService } from './services/base.service';
 import { CreateFeedbackComponent } from './components/feedbacks/create-feedback/create-feedback.component';
 import { MatIconModule } from '@angular/material/icon';
+import { PastEventListComponent } from './components/events/past-event-list/past-event-list.component';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
     AppComponent, 
     SigninComponent, 
     SignUpComponent, 
-    EventListComponent, 
+    FuturEventListComponent, 
     EventListItemComponent, 
     EventDetailsComponent,
     TopBarComponent, 
@@ -43,6 +44,7 @@ import { MatIconModule } from '@angular/material/icon';
     FeedbackListItemComponent,
     CreateEventComponent,
     CreateFeedbackComponent,
+    PastEventListComponent,
   ],
   imports: [
     BrowserModule,

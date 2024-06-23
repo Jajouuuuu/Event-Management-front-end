@@ -4,18 +4,21 @@ import { Event as EventItem } from "../../../data/event";
 import { SessionStorageService } from '../../../services/session-storage.service';
 import { User } from '../../../data/users';
 import { UsersService } from '../../../services/users.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
-  styleUrl: './event-list.component.css'
+  styleUrls: ['./event-list.component.css'] // Notez le 's' à styleUrls
 })
-export class EventListComponent implements OnInit {
+export class FuturEventListComponent implements OnInit {
   events: EventItem[] = [];
   user!: User;
 
-  constructor(private eventService: EventService,  private sessionStorageService: SessionStorageService, private userService: UsersService) { }
+  constructor(
+    private eventService: EventService,  
+    private sessionStorageService: SessionStorageService, 
+    private userService: UsersService
+  ) { }
 
   ngOnInit(): void {
     const userId = this.sessionStorageService.getItem('userId');
@@ -23,18 +26,18 @@ export class EventListComponent implements OnInit {
       this.userService.getUserById(userId).subscribe(
         (user: User) => {
           this.user = user;
+          this.getEvents(); // Déplacez l'appel ici pour s'assurer que l'utilisateur est récupéré avant d'appeler getEvents
         },
         error => {
           console.error('Error fetching user:', error);
         }
       );
     }
-    this.getEvents();
   }
 
   getEvents(): void {
     console.log("Avant l'appel au service");
-    this.eventService.getEvents().subscribe(
+    this.eventService.getFutureEvents().subscribe(
       events => {
         console.log("Evénements récupérés :", events);
         this.events = events;
