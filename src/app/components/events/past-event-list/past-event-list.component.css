@@ -1,35 +1,28 @@
-.title {
-    font-size: 3rem;
+  
+  .title {
+    font-size: 1.5rem;
     font-weight: 700;
-    font-family: 'Arial Black', sans-serif;
-    padding-left: 15px; 
-}
+    font-family: 'Inner', sans-serif;
+    text-align: center; 
+  }
   
-.lead {
-    padding-left: 15px; 
-}
+  .lead {
+    text-align: center; 
+  }
   
-.btn-custom {
-    background-color: #5f0388;
-    border-color: #5f0388;
-    color: #fff;
-    font-family: 'Arial'; 
-    font-weight: bold;
-    font-size: 1rem; 
-}
   
-.btn-custom:hover {
-    background-color: #470265;
-    border-color: #470265;
-}
-  
-.card {
+  .card {
     border: none;
     border-radius: 1rem;
-}
+  }
   
-.card:hover {
+  .card:hover {
     transform: translateY(-5px);
     transition: transform 0.3s ease;
-}
+  }
+  
+  .btn-inner {
+      font-family: 'Inner', sans-serif;
+      font-weight: bold;
+  }
   

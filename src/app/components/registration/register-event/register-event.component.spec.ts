@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeedbackComponent } from './feedback-list.component';
+import { RegisterEventComponent } from './register-event.component';
 
-describe('FeedbackComponent', () => {
-  let component: FeedbackComponent;
-  let fixture: ComponentFixture<FeedbackComponent>;
+describe('RegisterEventComponent', () => {
+  let component: RegisterEventComponent;
+  let fixture: ComponentFixture<RegisterEventComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FeedbackComponent]
+      declarations: [RegisterEventComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FeedbackComponent);
+    fixture = TestBed.createComponent(RegisterEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

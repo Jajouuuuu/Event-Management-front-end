@@ -1,0 +1,31 @@
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating mat-icon {
+    font-size: 24px;
+}
+
+.rating span {
+    margin-left: 8px;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.card-subtitle {
+    font-size: 1rem;
+}
+
+.card-text {
+    margin-top: 8px;
+    font-size: 1rem;
+}

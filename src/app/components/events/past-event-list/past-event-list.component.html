@@ -1,15 +1,15 @@
 <app-top-bar></app-top-bar>
+<div class="text-center">
+  <hr class="w-25 mx-auto border-gray">
+  <h2 class="title">Your past event's</h2>
+  <hr class="w-25 mx-auto border-gray">
+  <p class="lead">{{ user.username }}, would you like to review some of the events you attended?</p>
+  <p class="lead">Explore past events and discover feedback from other users.</p>
+  <p class="lead">You can read shared experiences and leave your own feedback to contribute to our community.</p>
+  <p class="lead">Join us in shaping memorable experiences together!</p>    
+</div>
 
-<div class="container-fluid my-2">
-  <div class="row mb-4" *ngIf="user">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-      <div>
-        <h2 class="title">Here is the list of the events you attend !</h2>
-        <p class="lead">You can give a feedback on those events.</p>
-      </div>
-    </div>
-  </div>
-
+<div class="container-fluid">
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <ng-container *ngFor="let event of events; index as i">
       <div class="col">

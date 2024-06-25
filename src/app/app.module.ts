@@ -4,7 +4,8 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './components/sign-in/sign-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from './services/users.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FuturEventListComponent } from './components/events/future-event-list/event-list.component';
@@ -15,8 +16,7 @@ import { RouterModule } from '@angular/router';
 import { EventDetailsComponent } from './components/events/event-details/event-details.component';
 import { RegistrationListComponent } from './components/registration/registration-list/registration-list.component';
 import { RegistrationItemComponent } from './components/registration/registration-item/registration-item.component';
-import { FeedbackListComponent } from './components/feedbacks/feedback-list/feedback-list.component';
-import { FeedbackListItemComponent } from './components/feedbacks/feedback-list-item/feedback-list-item.component';
+import { FeedbackComponent } from './components/feedbacks/feedback-list/feedback-list.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import { CategoryService } from './services/category.service';
@@ -26,6 +26,8 @@ import { BaseService } from './services/base.service';
 import { CreateFeedbackComponent } from './components/feedbacks/create-feedback/create-feedback.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PastEventListComponent } from './components/events/past-event-list/past-event-list.component';
+import { RegisterEventComponent } from './components/registration/register-event/register-event.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 
 @NgModule({
@@ -40,11 +42,12 @@ import { PastEventListComponent } from './components/events/past-event-list/past
     EventDetailsComponent, 
     RegistrationListComponent,
     RegistrationItemComponent,
-    FeedbackListComponent,
-    FeedbackListItemComponent,
+    FeedbackComponent,
     CreateEventComponent,
     CreateFeedbackComponent,
     PastEventListComponent,
+    RegisterEventComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,7 @@ import { PastEventListComponent } from './components/events/past-event-list/past
     AppRoutingModule, 
     HttpClientModule,
     RouterModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [
     UsersService,

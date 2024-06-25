@@ -20,6 +20,7 @@ export class EventDetailsComponent implements OnInit {
   isRegistered: boolean = false;
   userId!: string;
   imageUrl: string = '';
+  isFutureEvent?: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +35,6 @@ export class EventDetailsComponent implements OnInit {
     if (this.userId) {
       this.eventId = this.route.snapshot.paramMap.get('eventId')!;
       this.getEvent();
-      this.loadRegistrations();
     }
   }
 
@@ -42,40 +42,13 @@ export class EventDetailsComponent implements OnInit {
     this.eventService.getEventById(this.eventId).subscribe(
       event => {
         this.event = event;
+        this.isFutureEvent = new Date(event.date) > new Date(); // Move the date check here
         if (event.image) {
           this.getImageUrl(event.image.id);
         }
       },
       error => console.error("Erreur lors de la récupération des événements :", error)
     );
-  }
-  
-  loadRegistrations() {
-    this.registrationService.getRegistrationsByEventId(this.eventId)
-      .subscribe(registrations => {
-        this.registrations = registrations;
-        const currentUserId = this.userId;
-        this.isRegistered = registrations.some(registration => registration.user.id === currentUserId);
-      });
-  }
-
-  registerForEvent() {
-    if (this.userId) {
-      this.registrationService.registerForEvent(this.eventId, this.userId)
-        .subscribe(() => {
-          this.isRegistered = true;
-          this.loadRegistrations();
-        });
-    }
-  }
-
-  unregisterFromEvent(registrationId: string) {
-    const userId = this.sessionStorageService.getItem('userId') || '';
-    this.registrationService.unregisterFromEvent(registrationId, userId)
-      .subscribe(() => {
-        this.isRegistered = false;
-        this.loadRegistrations();
-      });
   }
 
   getImageUrl(imageId: string): void {

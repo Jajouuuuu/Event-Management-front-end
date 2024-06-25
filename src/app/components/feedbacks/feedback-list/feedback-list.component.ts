@@ -1,37 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FeedbackService } from '../../../services/feedback.services';
-import { SessionStorageService } from '../../../services/session-storage.service';
 import { Feedback } from '../../../data/feedback';
-import { User } from '../../../data/users';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-feedback-list',
   templateUrl: './feedback-list.component.html',
   styleUrls: ['./feedback-list.component.css']
 })
-export class FeedbackListComponent implements OnInit {
+export class FeedbackComponent implements OnInit {
+    @Input() eventId?: string; // Input property to receive eventId from parent component
+    feedbacks: Feedback[] = [];
 
-  feedbacks: Feedback[] = [];
-  user!: User;
+    constructor(private feedbackService: FeedbackService, private router: Router) { }
 
-  constructor(private feedbackService: FeedbackService, private sessionStorageService: SessionStorageService, private router: Router) { }
-
-  ngOnInit(): void {
-    const userId = this.sessionStorageService.getItem('userId');
-    if (userId) {
-      this.feedbackService.getFeedbacksForUser(userId).subscribe(
-        feedbacks => this.feedbacks = feedbacks,
-        error => console.error('Erreur lors du chargement des feedbacks', error)
-      );
-    } else {
-      console.error('User ID is not available in session storage');
+    ngOnInit(): void {
+        if (this.eventId) {
+            this.feedbackService.getFeedbacksForEvent(this.eventId).subscribe(
+                feedbacks => this.feedbacks = feedbacks,
+                error => console.error('Error loading feedbacks', error)
+            );
+        } else {
+            console.error('Event ID is not available');
+        }
     }
-  }
 
-  navigateToCreateFeedback(): void {
-    this.router.navigate(['/feedbacks/create']);
-  }
-
+    navigateToCreateFeedback(): void {
+        this.router.navigate(['/feedbacks/create']);
+    }
 }

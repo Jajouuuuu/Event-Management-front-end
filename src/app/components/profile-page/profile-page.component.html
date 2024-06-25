@@ -1,0 +1,24 @@
+<app-top-bar></app-top-bar>
+<div class="container mt-4">
+    <h2>{{ user?.username }}</h2>
+    <!-- Email Update Form -->
+    <form (ngSubmit)="updateEmail()">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" [(ngModel)]="user!.email" name="email" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Update Email</button>
+    </form>
+  
+    <!-- Registrations List -->
+    <h3 class="mt-4">My Registrations</h3>
+    <ul class="list-group">
+      <li *ngFor="let registration of registrations" class="list-group-item">
+        {{ registration.event.title }}
+      </li>
+    </ul>
+  
+    <!-- Delete Account Button -->
+    <button class="btn btn-danger mt-4" (click)="deleteAccount()">Delete Account</button>
+  </div>
+  

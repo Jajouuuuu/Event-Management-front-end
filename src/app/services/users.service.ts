@@ -26,6 +26,14 @@ export class UsersService extends BaseService {
         return this.http.post<User>(`${this.usersUrl}/user`, user);
       }
 
+      deleteUser(userId: string): Observable<void> {
+        return this.http.delete<void>(`${this.usersUrl}/user/id/${userId}`);
+      }
+    
+    updateUserEmail(userId: string, email: string): Observable<void> {
+      return this.http.put<void>(`${this.usersUrl}/user/id/${userId}`,{ email});
+    }
+
       login(username: string, password: string): Observable<any> {
         const body = { username, password };
         const headers = new HttpHeaders({

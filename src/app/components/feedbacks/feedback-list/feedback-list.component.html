@@ -1,13 +1,15 @@
-
-  <app-top-bar></app-top-bar>
-  <div class="row mt-3">
-    <div class="col-md-12">
-      <h3>Liste des Feedbacks</h3>
-      <div class="list-group">
-        <div *ngFor="let feedback of feedbacks" class="list-group-item mb-3">
-          <app-feedback-list-item [feedback]="feedback"></app-feedback-list-item>
-        </div>
+<div *ngFor="let feedback of feedbacks" class="card mb-3">
+  <div class="card-body">
+      <h5 class="card-title">{{ feedback.user.username }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ feedback.event.title }}</h6>
+      <p class="card-text">{{ feedback.comment }}</p>
+      <div class="rating">
+          <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" [style.color]="star <= feedback.rating ? 'gold' : 'gray'">
+              star
+          </mat-icon>
+          <span class="ml-1">{{ feedback.rating }}</span>
       </div>
-      <button class="btn btn-primary mt-3" (click)="navigateToCreateFeedback()">Ajouter un Feedback</button>
-    </div>
+      <p class="card-text"><small class="text-muted">{{ feedback.createdAt | date }}</small></p>
   </div>
+</div>
+<button class="btn btn-primary mt-3" (click)="navigateToCreateFeedback()">Add Feedback</button>

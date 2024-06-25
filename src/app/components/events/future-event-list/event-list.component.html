@@ -1,23 +1,29 @@
 <app-top-bar></app-top-bar>
-
-<div class="container-fluid my-2">
-  <div class="row mb-4" *ngIf="user">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-      <div>
-        <h2 class="title">Welcome on Event's Core, {{ user.username }}!</h2>
-        <p class="lead">Find some events to attend.</p>
-      </div>
-      <button [routerLink]="['/create-event']" class="btn btn-custom btn-lg">
-        <i class="bi bi-plus-lg me-2"></i>New Event
-      </button>
-    </div>
+  <div>
+    <hr class="w-25 mx-auto border-gray">
+    <h2 class="title">Discover Upcoming Events</h2>
+    <hr class="w-25 mx-auto border-gray">
+    <p class="lead">Welcome on Event's Core, {{ user.username }}!</p>
+    <p class="lead">You can explore and register for upcoming events. </p>
+    <p class="lead">Whether you're looking to learn, connect, or simply have fun !</p>
+    <p class="lead">Browse our curated list of events and secure your spot today. Join us in shaping memorable experiences together.</p>
   </div>
 
+  <div class="container-fluid">
+    <div class="row mb-4">
+      <div class="col-auto">
+        <button type="button" class="btn btn-dark btn-inner" [routerLink]="['/create-event']">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+          </svg>  
+          Event</button>
+      </div>
+    </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    <ng-container *ngFor="let event of events; index as i">
+    <ng-container *ngFor="let event of events">
       <div class="col">
         <app-event-list-item [event]="event"></app-event-list-item>
       </div>
     </ng-container>
   </div>
-</div>
+
