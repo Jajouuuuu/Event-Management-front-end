@@ -10,8 +10,8 @@ describe('CreateFeedbackComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CreateFeedbackComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(CreateFeedbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,37 +1,39 @@
 <app-top-bar></app-top-bar>
 <div class="container">
-    <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input id="title" class="form-control" formControlName="title" />
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" class="form-control" formControlName="description"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="date">Date</label>
-        <input type="date" id="date" class="form-control" formControlName="date" />
-      </div>
-      <div class="form-group">
-        <label for="time">Time</label>
-        <input type="time" id="time" class="form-control" formControlName="time" />
-      </div>
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input id="location" class="form-control" formControlName="location" />
-      </div>
-      <div class="form-group">
-        <label for="category">Category</label>
-        <select id="category" class="form-control" formControlName="category">
-          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="image">Image</label>
-        <input type="file" id="image" class="form-control" (change)="onFileChange($event)" />
-      </div>
-      <button type="submit" class="btn btn-primary">Create Event</button>
-    </form>
-  </div>
-  
+  <hr class="w-25 mx-auto border-black">
+  <h3 style="font-family: 'Inner', sans-serif; text-align: center;">Create Event</h3>
+  <hr class="w-25 mx-auto border-black">
+  <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" class="form-control" formControlName="title" />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" class="form-control" formControlName="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" id="date" class="form-control" formControlName="date" />
+    </div>
+    <div class="form-group">
+      <label for="time">Time</label>
+      <input type="time" id="time" class="form-control" formControlName="time" />
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input id="location" class="form-control" formControlName="location" />
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category" class="form-control" formControlName="category">
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input type="file" id="image" class="form-control" (change)="onFileChange($event)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create Event</button>
+  </form>
+</div>

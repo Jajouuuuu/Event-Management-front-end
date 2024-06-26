@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { BaseService } from './base.service';
 import { Event } from "../data/event";
 
@@ -10,15 +12,34 @@ export class EventService extends BaseService {
   private eventsUrl = `${this.environmentUrl}events`;
 
   constructor(private http: HttpClient) {
-      super();
+    super();
+  }
+
+  protected override handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      if (error instanceof HttpErrorResponse && error.status === 404) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Event not found',
+          text: 'The event you are looking for does not exist.',
+          confirmButtonColor: '#d33',
+          confirmButtonText: 'OK'
+        });
+      }
+      return super.handleError(operation, result)(error);
+    };
   }
 
   getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(this.eventsUrl);
+    return this.http.get<Event[]>(this.eventsUrl).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
   }
 
   getEventById(eventId: string): Observable<Event> {
-    return this.http.get<Event>(`${this.environmentUrl}events/event/${eventId}`);
+    return this.http.get<Event>(`${this.eventsUrl}/event/${eventId}`).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
   }
 
   createEvent(eventDTO: any, file: File): Observable<any> {
@@ -29,16 +50,38 @@ export class EventService extends BaseService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 
-    return this.http.post(this.eventsUrl, formData, { headers });
+    return this.http.post(this.eventsUrl, formData, { headers }).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
   }
 
-  // Nouveau endpoint pour récupérer les événements futurs par utilisateur
+  searchEvents(title: string): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.eventsUrl}/title/${title}`).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
+  }
+
+  searchEventsByDate(date: string): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.eventsUrl}/date/${date}`).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
+  }
+
+  searchEventsByCategory(categoryId: string): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.eventsUrl}/category/${categoryId}`).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
+  }
+
   getFutureEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.eventsUrl}/future`);
+    return this.http.get<Event[]>(`${this.eventsUrl}/future`).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
   }
 
-  // Nouveau endpoint pour récupérer les événements passés par utilisateur
   getPastEventsByUserId(userId: string): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.eventsUrl}/past/${userId}`);
+    return this.http.get<Event[]>(`${this.eventsUrl}/past/${userId}`).pipe(
+      catchError(this.handleError<any>('getEvents'))
+    );
   }
 }

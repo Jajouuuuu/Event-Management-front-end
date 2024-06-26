@@ -10,8 +10,8 @@ describe('SignUpComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SignUpComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SignUpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

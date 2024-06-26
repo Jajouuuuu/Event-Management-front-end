@@ -4,12 +4,12 @@ import { Feedback } from '../../../data/feedback';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-feedback-list',
-  templateUrl: './feedback-list.component.html',
-  styleUrls: ['./feedback-list.component.css']
+    selector: 'app-feedback-list',
+    templateUrl: './feedback-list.component.html',
+    styleUrls: ['./feedback-list.component.css']
 })
 export class FeedbackComponent implements OnInit {
-    @Input() eventId?: string; // Input property to receive eventId from parent component
+    @Input() eventId?: string; 
     feedbacks: Feedback[] = [];
 
     constructor(private feedbackService: FeedbackService, private router: Router) { }

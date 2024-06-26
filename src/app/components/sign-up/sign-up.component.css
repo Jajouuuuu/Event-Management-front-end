@@ -1,17 +1,17 @@
 .login {
-    min-height: 100vh;
+  min-height: 100vh;
 }
-  
+
 .bg-image {
   background-image: url('https://plcicgnimviruexqcyqv.supabase.co/storage/v1/object/sign/event-image/events_core_front_page.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJldmVudC1pbWFnZS9ldmVudHNfY29yZV9mcm9udF9wYWdlLnBuZyIsImlhdCI6MTcxOTE3MjIyNSwiZXhwIjoxNzIxNzY0MjI1fQ.PGRHkJ8VJMdtbUyy9mH2ggbr51lcozUNfn_1yT2UJbY&t=2024-06-23T19%3A50%3A23.164Z');
   background-size: cover;
   background-position: center;
 }
-  
+
 .login-heading {
   font-weight: 300;
 }
-  
+
 .btn-login {
   font-size: 0.9rem;
   letter-spacing: 0.05rem;
@@ -25,7 +25,5 @@
 
 .custom-purple {
   background-color: #432B57;
-  color: #fff; 
+  color: #fff;
 }
-
-  

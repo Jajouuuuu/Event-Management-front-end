@@ -10,21 +10,22 @@ import { Feedback } from '../data/feedback';
 })
 export class FeedbackService extends BaseService {
 
-    private eventsUrl = `${this.environmentUrl}feedbacks`;
+  private feedbackUrl = `${this.environmentUrl}feedbacks`;
 
   constructor(private http: HttpClient) {
     super()
   }
 
   getFeedbacksForUser(userId: string): Observable<Feedback[]> {
-    return this.http.get<Feedback[]>(`${this.eventsUrl}/user/${userId}`);
+    return this.http.get<Feedback[]>(`${this.feedbackUrl}/user/${userId}`);
   }
 
   getFeedbacksForEvent(eventId: string): Observable<Feedback[]> {
-    return this.http.get<Feedback[]>(`${this.eventsUrl}/event/${eventId}`);
+    return this.http.get<Feedback[]>(`${this.feedbackUrl}/event/${eventId}`);
   }
 
-  addFeedback(feedback: Feedback): Observable<Feedback> {
-    return this.http.post<Feedback>(`${this.eventsUrl}`, feedback);
+  addFeedback(feedbackDTO: any): Observable<any> {
+    return this.http.post<any>(this.feedbackUrl, feedbackDTO);
   }
+
 }

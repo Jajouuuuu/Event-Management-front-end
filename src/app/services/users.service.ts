@@ -6,54 +6,51 @@ import { catchError, map, Observable, of, tap, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import * as CryptoJS from 'crypto-js';
 
-
-
-
 @Injectable()
 export class UsersService extends BaseService {
 
-    private usersUrl = `${this.environmentUrl}users`;
+  private usersUrl = `${this.environmentUrl}users`;
 
-    constructor(private http: HttpClient) {
-        super();
-    }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-    getUserByUsername(username: string): Observable<User> {
-        return this.http.get<User>(`${this.usersUrl}/user/name/${username}`);
-    }
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/user/name/${username}`);
+  }
 
-    createUser(user: User): Observable<User> {
-        return this.http.post<User>(`${this.usersUrl}/user`, user);
-      }
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.usersUrl}/user`, user);
+  }
 
-      deleteUser(userId: string): Observable<void> {
-        return this.http.delete<void>(`${this.usersUrl}/user/id/${userId}`);
-      }
-    
-    updateUserEmail(userId: string, email: string): Observable<void> {
-      return this.http.put<void>(`${this.usersUrl}/user/id/${userId}`,{ email});
-    }
+  deleteUser(userId: string): Observable<void> {
+    return this.http.delete<void>(`${this.usersUrl}/user/id/${userId}`);
+  }
 
-      login(username: string, password: string): Observable<any> {
-        const body = { username, password };
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Accept': 'application/json' 
-        });
-    
-        return this.http.post<any>(`${this.usersUrl}/user/login`, body, { headers }).pipe(
-          catchError((error: HttpErrorResponse) => {
-            let errorMessage = 'Une erreur est survenue lors de la connexion.';
-            if (error.error) {
-              errorMessage = error.error;
-            }
-            return throwError(errorMessage);
-          })
-        );
-      }
+  updateUserEmail(userId: string, email: string): Observable<void> {
+    return this.http.put<void>(`${this.usersUrl}/user/id/${userId}`, { email });
+  }
 
-      getUserById(userId: string): Observable<User> {
-        return this.http.get<User>(`${this.usersUrl}/user/id/${userId}`);
-      }
-    
+  login(username: string, password: string): Observable<any> {
+    const body = { username, password };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.usersUrl}/user/login`, body, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Une erreur est survenue lors de la connexion.';
+        if (error.error) {
+          errorMessage = error.error;
+        }
+        return throwError(errorMessage);
+      })
+    );
+  }
+
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/user/id/${userId}`);
+  }
+
 }

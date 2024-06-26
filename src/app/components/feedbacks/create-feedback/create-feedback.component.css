@@ -1,0 +1,26 @@
+.inner-sans-serial-font {
+    font-family: "Inner", sans-serif;
+    font-size: 1.5rem;
+}
+
+.btn-black {
+    background-color: black;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.is-valid {
+    border-color: #28a745 !important;
+}

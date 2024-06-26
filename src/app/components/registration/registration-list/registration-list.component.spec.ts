@@ -10,8 +10,8 @@ describe('RegistrationListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [RegistrationListComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(RegistrationListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

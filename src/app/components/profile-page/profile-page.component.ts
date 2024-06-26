@@ -13,7 +13,7 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
-  user?:  User = {
+  user?: User = {
     id: '',
     username: '',
     email: '',
@@ -27,7 +27,7 @@ export class ProfilePageComponent implements OnInit {
     private userService: UsersService,
     private sessionStorageService: SessionStorageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const userId = this.sessionStorageService.getItem('userId');

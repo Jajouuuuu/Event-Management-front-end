@@ -10,3 +10,4 @@ export interface Feedback {
     createdAt: Date; 
   }
   
+export type CreateFeedbackData = Omit<Feedback, 'event' | 'user' | 'createdAt'>;

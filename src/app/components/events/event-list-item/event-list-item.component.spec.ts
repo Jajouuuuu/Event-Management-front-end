@@ -10,8 +10,8 @@ describe('EventListItemComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [EventListItemComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(EventListItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -13,7 +13,7 @@ export class CategoryService extends BaseService {
   private categoriesUrl = `${this.environmentUrl}categories`;
 
   constructor(private http: HttpClient) {
-      super();
+    super();
   }
 
   getCategories(): Observable<Category[]> {

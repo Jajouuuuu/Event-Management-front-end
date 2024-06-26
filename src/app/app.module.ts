@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { FuturEventListComponent } from './components/events/future-event-list/event-list.component';
 import { EventListItemComponent } from './components/events/event-list-item/event-list-item.component';
 import { EventService } from './services/event.service';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
@@ -25,9 +24,13 @@ import { RegistrationService } from './services/registration.service';
 import { BaseService } from './services/base.service';
 import { CreateFeedbackComponent } from './components/feedbacks/create-feedback/create-feedback.component';
 import { MatIconModule } from '@angular/material/icon';
-import { PastEventListComponent } from './components/events/past-event-list/past-event-list.component';
 import { RegisterEventComponent } from './components/registration/register-event/register-event.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { EventListComponent } from './components/events/event-list/event-list.component';
+import { FutureEventsHeaderComponent } from './components/events/futur-event-header/futur-event-header.component';
+import { PastEventsHeaderComponent } from './components/events/past-event-header/past-event-header.component';
+import { SearchBarComponent } from './components/events/search-bar/search-bar.component';
+import { OsmMapComponent } from './components/osm-map/osm-map.component';
 
 
 @NgModule({
@@ -35,7 +38,6 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
     AppComponent, 
     SigninComponent, 
     SignUpComponent, 
-    FuturEventListComponent, 
     EventListItemComponent, 
     EventDetailsComponent,
     TopBarComponent, 
@@ -45,9 +47,13 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
     FeedbackComponent,
     CreateEventComponent,
     CreateFeedbackComponent,
-    PastEventListComponent,
     RegisterEventComponent,
     ProfilePageComponent,
+    EventListComponent,
+    FutureEventsHeaderComponent,
+    PastEventsHeaderComponent,
+    SearchBarComponent,
+    OsmMapComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@ export interface Event {
     title: string;
     description: string;
     date: string;
-    time: string; // Pourrait être un objet avec des propriétés heures et minutes si besoin
+    time: string; 
     location: string;
     category: {
       id: string;
@@ -19,6 +19,6 @@ export interface Event {
       createdAt: Date;
     };
     createdAt: Date;
-    image: Image | null; // Chemin de l'image ou null si pas d'image
+    image: Image | null; 
   }
   

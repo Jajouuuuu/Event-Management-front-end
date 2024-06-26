@@ -10,8 +10,8 @@ describe('ProfilePageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProfilePageComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ProfilePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

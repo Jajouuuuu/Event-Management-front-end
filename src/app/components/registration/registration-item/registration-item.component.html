@@ -3,10 +3,9 @@
         <p><strong>Event:</strong> {{ registration.event?.title }}</p>
         <p><strong>Date:</strong> {{ registration.event?.date }}</p>
     </div>
+
     <div>
-        <img *ngIf="registration.event?.imageUrl" [src]="registration.event.imageUrl" class="img-fluid" alt="Event Image">
-    </div>
-    <div>
-        <button class="btn btn-danger btn-sm" (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
+        <button class="btn btn-danger btn-sm"
+            (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
     </div>
 </li>

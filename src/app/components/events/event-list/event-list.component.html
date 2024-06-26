@@ -1,0 +1,23 @@
+<app-top-bar></app-top-bar>
+
+<div class="text-center">
+  <ng-container *ngIf="eventType === 'future'; else pastHeader">
+    <app-future-events-header [user]="user"></app-future-events-header>
+    <button type="button" class="btn btn-dark" (click)="redirectToCreateEvent()">Add event</button>
+  </ng-container>
+  <ng-template #pastHeader>
+    <app-past-events-header [user]="user"></app-past-events-header>
+  </ng-template>
+</div>
+
+<app-search-bar (searchResults)="updateEvents($event)"></app-search-bar>
+
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <ng-container *ngFor="let event of events; index as i">
+      <div class="col">
+        <app-event-list-item [event]="event"></app-event-list-item>
+      </div>
+    </ng-container>
+  </div>
+</div>

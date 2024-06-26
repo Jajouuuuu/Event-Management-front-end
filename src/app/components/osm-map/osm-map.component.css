@@ -1,0 +1,10 @@
+.map-title {
+    font-size: 2rem;
+    font-family: 'Inner', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.spacer {
+    height: 100px;
+}

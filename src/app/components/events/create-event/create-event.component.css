@@ -1,0 +1,30 @@
+.form-group {
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: black;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background-color: black;
+    border-color: black;
+}
+
+.btn-primary:hover {
+    background-color: gray;
+    border-color: gray;
+}
+
+.btn-block {
+    display: block;
+    align-content: center;
+    width: 100%;
+}
+
+.swal2-popup {
+    font-family: 'Arial', sans-serif;
+}

@@ -1,0 +1,67 @@
+.registration-card {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Inner', sans-serif;
+    border-radius: 0.5rem;
+}
+
+.registration-card .card-title {
+    font-size: 1.25rem;
+
+}
+
+.registration-card .card-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-register {
+    background-color: black;
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 0.25rem;
+}
+
+.btn-register:hover {
+    background-color: black;
+}
+
+.btn-unregister {
+    background-color: #dc3545;
+    border: none;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-family: 'Inner', sans-serif;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 0.25rem;
+}
+
+.btn-unregister:hover {
+    background-color: #c82333;
+}
+
+.list-group-item {
+    background-color: #f8f9fa;
+    color: #000000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.alert-success {
+    background-color: black;
+    border: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.alert-success::before {
+    content: '✔ ';
+}

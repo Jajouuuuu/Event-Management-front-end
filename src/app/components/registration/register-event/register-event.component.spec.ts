@@ -10,8 +10,8 @@ describe('RegisterEventComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [RegisterEventComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(RegisterEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

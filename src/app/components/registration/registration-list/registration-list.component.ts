@@ -18,7 +18,7 @@ export class RegistrationListComponent implements OnInit {
     const userId = this.sessionStorageService.getItem('userId');
     if (userId) {
       this.registrationService.getRegistrationsByUserId(userId).subscribe(
-        (registrations: Registration[]) => { 
+        (registrations: Registration[]) => {
           this.registrations = registrations;
         },
         error => {

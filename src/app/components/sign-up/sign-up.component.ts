@@ -24,7 +24,6 @@ export class SignUpComponent {
     this.userService.createUser(this.user).subscribe(
       newUser => {
         console.log('Utilisateur créé avec succès:', newUser);
-        // Optionnel : rediriger l'utilisateur vers une page de connexion
       },
       error => {
         console.error('Erreur lors de la création de l\'utilisateur:', error);

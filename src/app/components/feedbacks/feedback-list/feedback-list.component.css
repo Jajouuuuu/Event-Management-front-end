@@ -1,31 +1,54 @@
-.card {
+.feedback-card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    font-family: 'Inner', sans-serif;
+    background-color: #ffffff;
+
+}
+
+.feedback-card .card-body {
+    padding: 1.5rem;
+}
+
+.feedback-card .card-title {
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+.feedback-card .card-subtitle {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.feedback-card .card-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #000000;
 }
 
 .rating {
     display: flex;
     align-items: center;
+    margin-top: 0.5rem;
 }
 
 .rating mat-icon {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .rating span {
-    margin-left: 8px;
-}
-
-.card-title {
-    font-weight: bold;
+    margin-left: 0.5rem;
     font-size: 1.25rem;
 }
 
-.card-subtitle {
+.add-feedback-btn {
+    font-family: 'Inner', sans-serif;
     font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s;
 }
 
-.card-text {
-    margin-top: 8px;
-    font-size: 1rem;
+.add-feedback-btn:hover {
+    background-color: black;
 }

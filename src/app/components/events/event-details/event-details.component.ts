@@ -42,7 +42,7 @@ export class EventDetailsComponent implements OnInit {
     this.eventService.getEventById(this.eventId).subscribe(
       event => {
         this.event = event;
-        this.isFutureEvent = new Date(event.date) > new Date(); // Move the date check here
+        this.isFutureEvent = new Date(event.date) > new Date();
         if (event.image) {
           this.getImageUrl(event.image.id);
         }

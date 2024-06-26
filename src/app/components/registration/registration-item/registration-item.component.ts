@@ -8,17 +8,17 @@ import { RegistrationService } from '../../../services/registration.service';
   styleUrls: ['./registration-item.component.css']
 })
 export class RegistrationItemComponent {
-  @Input() registration: any; 
+  @Input() registration: any;
   isRegistered!: boolean;
 
-  constructor( private sessionStorageService: SessionStorageService, private registrationService: RegistrationService) { }
+  constructor(private sessionStorageService: SessionStorageService, private registrationService: RegistrationService) { }
 
   unregisterFromEvent(registrationId: string) {
     const userId = this.sessionStorageService.getItem('userId') || '';
     this.registrationService.unregisterFromEvent(registrationId, userId)
       .subscribe(() => {
         this.isRegistered = false;
-      
+
       });
   }
 }

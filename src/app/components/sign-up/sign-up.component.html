@@ -10,21 +10,26 @@
 
               <form (ngSubmit)="signUp()">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username" [(ngModel)]="user.username" required>
+                  <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username"
+                    [(ngModel)]="user.username" required>
                   <label for="floatingUsername">Username</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="name@example.com" [(ngModel)]="user.email" required>
+                  <input type="email" class="form-control" id="floatingEmail" name="email"
+                    placeholder="name@example.com" [(ngModel)]="user.email" required>
                   <label for="floatingEmail">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" [(ngModel)]="user.password" required>
+                  <input type="password" class="form-control" id="floatingPassword" name="password"
+                    placeholder="Password" [(ngModel)]="user.password" required>
                   <label for="floatingPassword">Password</label>
                 </div>
 
                 <div class="d-grid">
-                  <button class="btn btn-lg btn-login text-uppercase fw-bold mb-2 custom-purple" type="submit">Sign up</button>
-                  <button class="btn btn-lg btn-outline-secondary btn-login text-uppercase fw-bold mb-2" routerLink="/sign-in">Sign in</button>
+                  <button class="btn btn-lg btn-login text-uppercase fw-bold mb-2 custom-purple" type="submit">Sign
+                    up</button>
+                  <button class="btn btn-lg btn-outline-secondary btn-login text-uppercase fw-bold mb-2"
+                    routerLink="/sign-in">Sign in</button>
                 </div>
 
               </form>

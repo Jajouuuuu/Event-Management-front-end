@@ -1,20 +1,17 @@
-import { Component, Input } from '@angular/core';
-import { EventService } from '../../../services/event.service';
-import { Event } from "../../../data/event";
-import { Image } from '../../../data/image';
+import { Component, Input, OnInit } from '@angular/core';
+import { Event } from '../../../data/event';
 import { ImageService } from '../../../services/image.service';
 
 @Component({
   selector: 'app-event-list-item',
   templateUrl: './event-list-item.component.html',
-  styleUrl: './event-list-item.component.css'
+  styleUrls: ['./event-list-item.component.css']
 })
-export class EventListItemComponent {
-  @Input() 
-  event!: Event;
+export class EventListItemComponent implements OnInit {
+  @Input() event!: Event;
   imageUrl: string = '';
 
-  constructor(private eventService: EventService, private imageService: ImageService) { }
+  constructor(private imageService: ImageService) { }
 
   ngOnInit(): void {
     if (this.event && this.event.image) {

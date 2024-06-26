@@ -10,8 +10,8 @@ describe('EventDetailsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [EventDetailsComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(EventDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

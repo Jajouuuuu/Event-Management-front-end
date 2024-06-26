@@ -7,13 +7,13 @@ import { BaseService } from './base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ImageService extends BaseService{
+export class ImageService extends BaseService {
 
-    private usersUrl = `${this.environmentUrl}images`;
-  
-    constructor(private http: HttpClient) { super();}
+  private usersUrl = `${this.environmentUrl}images`;
+
+  constructor(private http: HttpClient) { super(); }
 
   getImageById(id: string): Observable<Blob> {
-    return this.http.get(`${this.environmentUrl}images/${id}`, {responseType : 'blob'});
+    return this.http.get(`${this.environmentUrl}images/${id}`, { responseType: 'blob' });
   }
 }
