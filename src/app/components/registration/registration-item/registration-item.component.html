@@ -1,11 +1,10 @@
-<li class="list-group-item d-flex justify-content-between align-items-center">
+<li class="list-group-item d-flex justify-content-between align-items-center registration-item">
     <div>
-        <p><strong>Event:</strong> {{ registration.event?.title }}</p>
-        <p><strong>Date:</strong> {{ registration.event?.date }}</p>
+      <p class="mb-1"><strong>Event:</strong> {{ registration?.event?.title }}</p>
+      <p class="mb-0"><strong>Date:</strong> {{ registration?.event?.date }}</p>
     </div>
-
     <div>
-        <button class="btn btn-danger btn-sm"
-            (click)="unregisterFromEvent(registration.registrationId)">Unregister</button>
+      <button class="btn btn-dark btn-sm" (click)="unregisterFromEvent(registration?.registrationId)">Unregister</button>
     </div>
-</li>
+  </li>
+  

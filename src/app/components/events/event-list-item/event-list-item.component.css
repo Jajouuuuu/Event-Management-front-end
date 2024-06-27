@@ -30,9 +30,11 @@
 
 .event-card .badge {
   font-size: 0.85rem;
-}
-
-.event-card .badge.rounded-pill {
   background-color: black;
   color: #fff;
 }
+
+.event-card .badge.text-bg-dark {
+  font-family: 'Inner', sans-serif;
+}
+

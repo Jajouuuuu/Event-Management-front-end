@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Registration } from '../../../data/registration';
 import { RegistrationService } from '../../../services/registration.service';
-import { User } from '../../../data/users';
 import { SessionStorageService } from '../../../services/session-storage.service';
 
 @Component({
@@ -12,7 +11,10 @@ import { SessionStorageService } from '../../../services/session-storage.service
 export class RegistrationListComponent implements OnInit {
   registrations: Registration[] = [];
 
-  constructor(private registrationService: RegistrationService, private sessionStorageService: SessionStorageService) { }
+  constructor(
+    private registrationService: RegistrationService,
+    private sessionStorageService: SessionStorageService
+  ) { }
 
   ngOnInit(): void {
     const userId = this.sessionStorageService.getItem('userId');
@@ -26,5 +28,9 @@ export class RegistrationListComponent implements OnInit {
         }
       );
     }
+  }
+
+  handleUnregisterSuccess(registrationId: string): void {
+    this.registrations = this.registrations.filter(reg => reg.registrationId !== registrationId);
   }
 }

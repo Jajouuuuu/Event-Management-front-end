@@ -1,0 +1,19 @@
+<app-top-bar></app-top-bar>
+<div class="container mt-4">
+  <app-user-info></app-user-info>
+
+  <app-registration-list></app-registration-list>
+
+  <h3 class="mt-4">Events Created By You</h3>
+  <div *ngIf="eventsCreatedByUser.length === 0" class="alert alert-info">
+    No events created yet.
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4" *ngFor="let event of eventsCreatedByUser">
+      <app-event-list-item [event]="event"></app-event-list-item>
+    </div>
+  </div>
+
+  <button class="btn btn-danger mt-4" (click)="deleteAccount()">Delete Account</button>
+</div>
+<app-footer></app-footer>

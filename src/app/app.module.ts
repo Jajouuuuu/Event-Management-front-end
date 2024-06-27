@@ -25,12 +25,14 @@ import { BaseService } from './services/base.service';
 import { CreateFeedbackComponent } from './components/feedbacks/create-feedback/create-feedback.component';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterEventComponent } from './components/registration/register-event/register-event.component';
-import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { ProfilePageComponent } from './components/profile/profile-page/profile-page.component';
 import { EventListComponent } from './components/events/event-list/event-list.component';
 import { FutureEventsHeaderComponent } from './components/events/futur-event-header/futur-event-header.component';
 import { PastEventsHeaderComponent } from './components/events/past-event-header/past-event-header.component';
 import { SearchBarComponent } from './components/events/search-bar/search-bar.component';
 import { OsmMapComponent } from './components/osm-map/osm-map.component';
+import { UserInfoComponent } from './components/profile/user-info/user-info.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { OsmMapComponent } from './components/osm-map/osm-map.component';
     PastEventsHeaderComponent,
     SearchBarComponent,
     OsmMapComponent,
+    UserInfoComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

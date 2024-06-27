@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
       <div class="d-flex flex-wrap mb-2">
-        <span class="badge text-bg-dark" style="font-family: 'Inner', sans-serif;">{{ event.category.name }}</span>
+        <span class="badge text-bg-dark">{{ event.category.name }}</span>
       </div>
       <h5 class="card-title">{{ event.title }}</h5>
       <div class="mb-2">
@@ -17,6 +17,9 @@
         <p>{{ event.date }}</p>
       </div>
       <p>{{ event.time }}</p>
+      <div *ngIf="isProfilePage() && isCurrentUserEventOwner" class="d-flex justify-content-end mt-auto">
+        <button class="btn btn-dark btn-sm" (click)="deleteEvent()">Delete</button>
+      </div>
     </div>
   </div>
 </div>

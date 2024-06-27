@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { SessionStorageService } from '../../../services/session-storage.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RegistrationService } from '../../../services/registration.service';
+import { SessionStorageService } from '../../../services/session-storage.service';
 
 @Component({
   selector: 'registration-item',
@@ -9,16 +9,22 @@ import { RegistrationService } from '../../../services/registration.service';
 })
 export class RegistrationItemComponent {
   @Input() registration: any;
-  isRegistered!: boolean;
+  @Output() unregisterSuccess = new EventEmitter<string>();
 
-  constructor(private sessionStorageService: SessionStorageService, private registrationService: RegistrationService) { }
+  constructor(
+    private registrationService: RegistrationService,
+    private sessionStorageService: SessionStorageService
+  ) { }
 
-  unregisterFromEvent(registrationId: string) {
+  unregisterFromEvent(registrationId: string): void {
     const userId = this.sessionStorageService.getItem('userId') || '';
-    this.registrationService.unregisterFromEvent(registrationId, userId)
-      .subscribe(() => {
-        this.isRegistered = false;
-
-      });
+    this.registrationService.unregisterFromEvent(registrationId, userId).subscribe(
+      () => {
+        this.unregisterSuccess.emit(registrationId);
+      },
+      error => {
+        console.error('Error unregistering from event:', error);
+      }
+    );
   }
 }

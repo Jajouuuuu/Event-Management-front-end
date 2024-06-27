@@ -15,6 +15,10 @@ export class UsersService extends BaseService {
     super();
   }
 
+  getCurrentUser(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/user/id/${userId}`);
+  }
+
   getUserByUsername(username: string): Observable<User> {
     return this.http.get<User>(`${this.usersUrl}/user/name/${username}`);
   }
@@ -27,8 +31,9 @@ export class UsersService extends BaseService {
     return this.http.delete<void>(`${this.usersUrl}/user/id/${userId}`);
   }
 
-  updateUserEmail(userId: string, email: string): Observable<void> {
-    return this.http.put<void>(`${this.usersUrl}/user/id/${userId}`, { email });
+  updateUserInfo(userId: string, email: string, username: string, password?: string): Observable<void> {
+    const body = { email, username, password };
+    return this.http.put<void>(`${this.usersUrl}/user/id/${userId}`, body);
   }
 
   login(username: string, password: string): Observable<any> {

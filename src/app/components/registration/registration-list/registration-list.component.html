@@ -1,7 +1,5 @@
-<app-top-bar></app-top-bar>
-<div class="container mt-4">
-    <h3>My Registrations</h3>
-    <ul class="list-group">
-        <registration-item *ngFor="let registration of registrations" [registration]="registration"></registration-item>
-    </ul>
-</div>
+<h3>My Registrations</h3>
+  <ul class="list-group">
+    <registration-item *ngFor="let registration of registrations" [registration]="registration" (unregisterSuccess)="handleUnregisterSuccess(registration.registrationId)"></registration-item>
+  </ul>
+

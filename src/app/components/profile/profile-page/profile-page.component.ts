@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../data/users';
-import { Event } from '../../data/event';
-import { SessionStorageService } from '../../services/session-storage.service';
-import { RegistrationService } from '../../services/registration.service';
-import { Registration } from '../../data/registration';
-import { UsersService } from '../../services/users.service';
+import { User } from '../../../data/users';
+import { Event } from '../../../data/event';
+import { SessionStorageService } from '../../../services/session-storage.service';
+import { RegistrationService } from '../../../services/registration.service';
+import { Registration } from '../../../data/registration';
+import { UsersService } from '../../../services/users.service';
+import { EventService } from '../../../services/event.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -21,12 +22,14 @@ export class ProfilePageComponent implements OnInit {
     createdAt: ''
   };
   registrations: Registration[] = [];
+  eventsCreatedByUser: Event[] = [];
 
   constructor(
     private registrationService: RegistrationService,
     private userService: UsersService,
     private sessionStorageService: SessionStorageService,
-    private router: Router
+    private router: Router, 
+    private eventService: EventService
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +44,15 @@ export class ProfilePageComponent implements OnInit {
           console.error('Error fetching user:', error);
         }
       );
-    }
+    this.eventService.getEventsCreatedByUser(userId).subscribe(
+      (events: Event[]) => {
+        this.eventsCreatedByUser = events;
+      },
+      error => {
+        console.error('Error fetching events created by user:', error);
+      }
+    );
+  }
   }
 
   loadUserRegistrations(userId: string): void {
@@ -49,17 +60,6 @@ export class ProfilePageComponent implements OnInit {
       (registrations) => (this.registrations = registrations),
       (error) => console.error('Error loading registrations', error)
     );
-  }
-
-  updateEmail(): void {
-    if (this.user) {
-      const userId = this.user.id;
-      const newEmail = this.user.email;
-      this.userService.updateUserEmail(userId, newEmail).subscribe(
-        () => alert('Email updated successfully'),
-        (error) => console.error('Error updating email', error)
-      );
-    }
   }
 
   deleteAccount(): void {

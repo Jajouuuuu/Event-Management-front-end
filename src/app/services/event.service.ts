@@ -84,4 +84,14 @@ export class EventService extends BaseService {
       catchError(this.handleError<any>('getEvents'))
     );
   }
+
+  getEventsCreatedByUser(userId: string): Observable<Event[]> {
+    const url = `${this.eventsUrl}/createdBy/${userId}`;
+    return this.http.get<Event[]>(url);
+  }
+
+  deleteEvent(eventId: string): Observable<void> {
+    const url = `${this.eventsUrl}/${eventId}`;
+    return this.http.delete<void>(url);
+  }
 }
