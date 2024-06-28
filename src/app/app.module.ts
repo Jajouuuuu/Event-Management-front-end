@@ -33,6 +33,7 @@ import { SearchBarComponent } from './components/events/search-bar/search-bar.co
 import { OsmMapComponent } from './components/osm-map/osm-map.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { BlobToImageDirective } from './services/blob-to-image.directive';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { FooterComponent } from './components/footer/footer.component';
     OsmMapComponent,
     UserInfoComponent,
     FooterComponent,
+    BlobToImageDirective 
   ],
   imports: [
     BrowserModule,

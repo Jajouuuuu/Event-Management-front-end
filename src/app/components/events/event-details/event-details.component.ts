@@ -42,26 +42,26 @@ export class EventDetailsComponent implements OnInit {
     this.eventService.getEventById(this.eventId).subscribe(
       event => {
         this.event = event;
-        this.isFutureEvent = new Date(event.date) > new Date();
+        this.isFutureEvent = new Date(event.dateTime) > new Date();
         if (event.image) {
-          this.getImageUrl(event.image.id);
+          this.fetchImage(event.image.url);
         }
       },
       error => console.error("Erreur lors de la récupération des événements :", error)
     );
   }
 
-  getImageUrl(imageId: string): void {
-    this.imageService.getImageById(imageId).subscribe(
-      blob => {
+  fetchImage(fileName: string): void {
+    this.imageService.getFile(fileName).subscribe(
+      (blob: Blob) => {
         const reader = new FileReader();
-        reader.onloadend = () => {
+        reader.onload = () => {
           this.imageUrl = reader.result as string;
         };
         reader.readAsDataURL(blob);
       },
       error => {
-        console.error('Erreur lors de la récupération de l\'image :', error);
+        console.error('Failed to fetch image:', error);
       }
     );
   }

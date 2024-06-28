@@ -1,11 +1,11 @@
+import { Timestamp } from "rxjs";
 import { Image } from "./image"
 
 export interface Event {
     id: string;
     title: string;
     description: string;
-    date: string;
-    time: string; 
+    dateTime: string;
     location: string;
     category: {
       id: string;

@@ -18,12 +18,11 @@
           <br>
           <div>
             <p class="badge text-bg-dark">{{ event.category.name }}</p>
-            <span class="badge text-bg-dark">{{ event.date }}</span>
-            <span class="badge text-bg-dark">{{ event.time }}</span>
+            <span class="badge text-bg-dark">{{ event.dateTime }}</span>
           </div>
         </div>
         <div class="event-image-container">
-          <img *ngIf="imageUrl" [src]="imageUrl" class="event-image" alt="Event Image">
+          <img *ngIf="imageUrl" [appBlobToImage]="imageUrl" [src]="imageUrl" class="event-image" alt="Event Image">
         </div>
         <div class="card-body">
           <p class="card-text mt-3">{{ event.description }}</p>

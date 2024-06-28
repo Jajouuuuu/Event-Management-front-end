@@ -2,8 +2,10 @@
   <div class="card event-card mb-4" [routerLink]="['/event-details', event.id]" style="cursor: pointer;">
     <div class="position-relative">
       <img
+      [appBlobToImage]="imageUrl"
         [src]="imageUrl ? imageUrl : 'https://png.pngtree.com/background/20210715/original/pngtree-purple-liquid-marble-texture-background-picture-image_1293632.jpg'"
-        class="card-img-top img-fluid event-image" alt="Event image">
+        class="card-img-top img-fluid event-image"
+       alt="Event image">
     </div>
     <div class="card-body">
       <div class="d-flex flex-wrap mb-2">
@@ -14,9 +16,8 @@
         <small class="event-location"><i class="bi bi-geo-alt"></i> {{ event.location }}</small>
       </div>
       <div class="d-flex flex-wrap">
-        <p>{{ event.date }}</p>
+        <p>{{ event.dateTime }}</p>
       </div>
-      <p>{{ event.time }}</p>
       <div *ngIf="isProfilePage() && isCurrentUserEventOwner" class="d-flex justify-content-end mt-auto">
         <button class="btn btn-dark btn-sm" (click)="deleteEvent()">Delete</button>
       </div>

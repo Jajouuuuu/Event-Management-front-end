@@ -19,7 +19,7 @@ export class EventListItemComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.event && this.event.image) {
-      this.getImageUrl(this.event.image.id);
+      this.fetchImage(this.event.image.url);
     }
     this.checkCurrentUserEventOwner();
   }
@@ -33,20 +33,22 @@ export class EventListItemComponent implements OnInit {
     this.isCurrentUserEventOwner = this.event.createdBy.id === currentUserId;
   }
 
-  getImageUrl(imageId: string): void {
-    this.imageService.getImageById(imageId).subscribe(
-      blob => {
+  fetchImage(fileName: string): void {
+    this.imageService.getFile(fileName).subscribe(
+      (blob: Blob) => {
         const reader = new FileReader();
-        reader.onloadend = () => {
+        reader.onload = () => {
           this.imageUrl = reader.result as string;
         };
         reader.readAsDataURL(blob);
       },
       error => {
-        console.error('Erreur lors de la récupération de l\'image :', error);
+        console.error('Failed to fetch image:', error);
       }
     );
   }
+  
+  
 
   deleteEvent(): void {
     if (confirm('Are you sure you want to delete this event?')) {
