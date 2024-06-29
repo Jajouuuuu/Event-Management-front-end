@@ -1,19 +1,19 @@
 <hr class="w-25 mx-auto border-black">
-<h2 class="text-center">{{ user?.username }}, your profile</h2>
+<h2 class="text-center">{{ user.username }}, your profile</h2>
 <hr class="w-25 mx-auto border-black">
 <form (ngSubmit)="updateUserInfo()" class="mt-4">
     <h3>Change you informations here</h3>
   <div class="form-group">
     <label for="username">Username:</label>
-    <input type="text" [(ngModel)]="user!.username" name="username" class="form-control" required>
+    <input type="text" [(ngModel)]="user.username" name="username" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="email">Email:</label>
-    <input type="email" [(ngModel)]="user!.email" name="email" class="form-control" required>
+    <input type="email" [(ngModel)]="user.email" name="email" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="password">Password:</label>
-    <input type="password" [(ngModel)]="user!.password" name="password" class="form-control">
+    <input type="password" [(ngModel)]="user.password" name="password" class="form-control">
   </div>
   <div class="d-flex justify-content-end"> 
     <button type="submit" class="btn btn-dark mt-3">Update Info</button>

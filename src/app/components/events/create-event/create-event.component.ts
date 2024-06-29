@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../../services/event.service';
 import { SessionStorageService } from '../../../services/session-storage.service';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../data/category';
+import { SwalService } from '../../../services/swal.service';
 
 @Component({
   selector: 'app-create-event',
@@ -19,15 +20,16 @@ export class CreateEventComponent implements OnInit {
     private fb: FormBuilder,
     private eventService: EventService,
     private sessionStorageService: SessionStorageService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private swalService: SwalService
   ) {
     this.createEventForm = this.fb.group({
-      title: [''],
-      description: [''],
-      date: [''],
-      time: [''],
-      location: [''],
-      category: [''],
+      title: ['', [Validators.required, Validators.minLength(10)]],
+      description: ['', [Validators.required, Validators.maxLength(2500), Validators.minLength(100)]],
+      date: ['', Validators.required],
+      time: ['', Validators.required],
+      location: ['', Validators.required],
+      category: ['', Validators.required],
     });
   }
 
@@ -52,29 +54,33 @@ export class CreateEventComponent implements OnInit {
     const userId = this.sessionStorageService.getItem('userId');
     const createdAt = new Date().toISOString();
     const formValues = this.createEventForm.value;
+    const dateTime = new Date(formValues.date + 'T' + formValues.time).toISOString();
     const eventDTO = {
       title: formValues.title,
       description: formValues.description,
-      date: formValues.date,
-      time: formValues.time,
+      dateTime: dateTime,
       location: formValues.location,
       categoryId: formValues.category,
       createdById: userId,
       createdAt: createdAt
     };
 
-    console.log('Event DTO:', eventDTO);
-
     if (this.selectedFile) {
-      console.log('Selected file:', this.selectedFile);
-
-      this.eventService.createEvent(eventDTO, this.selectedFile).subscribe(response => {
-        console.log('Event created successfully', response);
-      }, error => {
-        console.error('Error creating event', error);
-      });
+      this.eventService.createEvent(eventDTO, this.selectedFile).subscribe(
+        response => {
+          console.log('Event created successfully', response);
+          this.swalService.alert('Success', 'Event created successfully!', 'success').then(() => {
+            window.location.href = 'http://localhost:4200/events/future';
+          });
+        },
+        error => {
+          console.error('Error creating event', error);
+          const errorMessage = error?.error?.message || 'An error occurred, please try again.';
+          this.swalService.alert('Error', errorMessage, 'error');
+        }
+      );
     } else {
-      console.error('File is required');
+      this.swalService.alert('Error', 'File is required', 'error');
     }
   }
 }

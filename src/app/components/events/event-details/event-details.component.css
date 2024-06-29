@@ -82,3 +82,9 @@
     background-color: #666666;
     color: #ffffff;
 }
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+  }

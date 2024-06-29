@@ -12,6 +12,8 @@ h3 {
 .btn-primary {
     background-color: black;
     border-color: black;
+    display: block; 
+    margin: 0 auto; 
 }
 
 .btn-primary:hover {
@@ -28,3 +30,9 @@ h3 {
 .swal2-popup {
     font-family: 'Arial', sans-serif;
 }
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hauteur minimale de la vue */
+  }

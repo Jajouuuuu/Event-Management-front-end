@@ -46,7 +46,7 @@ export class RegisterEventComponent implements OnInit {
   }
 
   loadRegistrations() {
-    this.registrationService.getRegistrationsByEventId(this.eventId)
+    this.registrationService.searchRegistrations({ eventId: this.eventId})
       .subscribe(registrations => {
         this.registrations = registrations;
         const currentUserId = this.userId;
@@ -56,7 +56,7 @@ export class RegisterEventComponent implements OnInit {
 
   registerForEvent() {
     if (this.userId) {
-      this.registrationService.registerForEvent(this.eventId, this.userId)
+      this.registrationService.createRegistration(this.eventId, this.userId)
         .subscribe(() => {
           this.isRegistered = true;
           this.loadRegistrations();
@@ -66,7 +66,7 @@ export class RegisterEventComponent implements OnInit {
 
   unregisterFromEvent(registrationId: string) {
     const userId = this.sessionStorageService.getItem('userId') || '';
-    this.registrationService.unregisterFromEvent(registrationId, userId)
+    this.registrationService.deleteRegistration(registrationId, userId)
       .subscribe(() => {
         this.isRegistered = false;
         this.loadRegistrations();

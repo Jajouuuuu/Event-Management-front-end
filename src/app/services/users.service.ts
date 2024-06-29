@@ -1,40 +1,53 @@
 import { Injectable } from "@angular/core";
 import { BaseService } from "./base.service";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "../data/users";
-import { catchError, map, Observable, of, tap, throwError } from "rxjs";
-import { Router } from "@angular/router";
-import * as CryptoJS from 'crypto-js';
+import { catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { SwalService } from "./swal.service";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class UsersService extends BaseService {
 
   private usersUrl = `${this.environmentUrl}users`;
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(private http: HttpClient, swalService: SwalService) {
+    super(swalService); // Appel du constructeur de BaseService avec SwalService
   }
 
-  getCurrentUser(userId: string): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/user/id/${userId}`);
-  }
-
-  getUserByUsername(username: string): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/user/name/${username}`);
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/${userId}`);
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.usersUrl}/user`, user);
+    return this.http.post<User>(`${this.usersUrl}`, user);
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.usersUrl}`);
+  }
+
+  updateUser(userId: string, username: string, email: string, password: string): Observable<User> {
+    return this.http.put<User>(`${this.usersUrl}/${userId}`, {username, email, password});
   }
 
   deleteUser(userId: string): Observable<void> {
-    return this.http.delete<void>(`${this.usersUrl}/user/id/${userId}`);
+    return this.http.delete<void>(`${this.usersUrl}/${userId}`);
   }
 
-  updateUserInfo(userId: string, email: string, username: string, password?: string): Observable<void> {
-    const body = { email, username, password };
-    return this.http.put<void>(`${this.usersUrl}/user/id/${userId}`, body);
+  searchUsers(username?: string, email?: string): Observable<User[]> {
+    let params: { [key: string]: any } = {};
+    if (username) {
+      params['username'] = username;
+    }
+    if (email) {
+      params['email'] = email;
+    }
+    return this.http.get<User[]>(`${this.usersUrl}/search`, { params });
   }
+  
 
   login(username: string, password: string): Observable<any> {
     const body = { username, password };
@@ -43,19 +56,10 @@ export class UsersService extends BaseService {
       'Accept': 'application/json'
     });
 
-    return this.http.post<any>(`${this.usersUrl}/user/login`, body, { headers }).pipe(
-      catchError((error: HttpErrorResponse) => {
-        let errorMessage = 'Une erreur est survenue lors de la connexion.';
-        if (error.error) {
-          errorMessage = error.error;
-        }
-        return throwError(errorMessage);
+    return this.http.post<any>(`${this.usersUrl}/login`, body, { headers }).pipe(
+      catchError(error => {
+        throw error;
       })
     );
   }
-
-  getUserById(userId: string): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/user/id/${userId}`);
-  }
-
 }

@@ -16,7 +16,7 @@ export class FeedbackComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.eventId) {
-            this.feedbackService.getFeedbacksForEvent(this.eventId).subscribe(
+            this.feedbackService.searchFeedbacks({eventId :this.eventId}).subscribe(
                 feedbacks => this.feedbacks = feedbacks,
                 error => console.error('Error loading feedbacks', error)
             );

@@ -24,3 +24,9 @@
 .is-valid {
     border-color: #28a745 !important;
 }
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hauteur minimale de la vue */
+  }

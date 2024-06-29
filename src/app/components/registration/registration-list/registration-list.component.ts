@@ -19,7 +19,7 @@ export class RegistrationListComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.sessionStorageService.getItem('userId');
     if (userId) {
-      this.registrationService.getRegistrationsByUserId(userId).subscribe(
+      this.registrationService.searchRegistrations({ userId :userId}).subscribe(
         (registrations: Registration[]) => {
           this.registrations = registrations;
         },

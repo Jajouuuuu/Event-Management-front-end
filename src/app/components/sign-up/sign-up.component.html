@@ -2,12 +2,15 @@
   <div class="row g-0">
     <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
     <div class="col-md-8 col-lg-6">
-      <div class="login d-flex align-items-center py-5">
+      <div class="login d-flex flex-column justify-content-center align-items-center py-5">
         <div class="container">
+          <div class="text-center mb-4">
+            <h2 class="login-heading mb-4">THE EVENT'S</h2>
+            <hr class="w-25 mx-auto border-gray">
+            <h3 class="create-account">Create your account!</h3>
+          </div>
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
-              <h3 class="login-heading mb-4">Create your account!</h3>
-
               <form (ngSubmit)="signUp()">
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username"
@@ -26,12 +29,10 @@
                 </div>
 
                 <div class="d-grid">
-                  <button class="btn btn-lg btn-login text-uppercase fw-bold mb-2 custom-purple" type="submit">Sign
-                    up</button>
+                  <button class="btn btn-lg btn-login text-uppercase fw-bold mb-2 custom-purple" type="submit">Sign up</button>
                   <button class="btn btn-lg btn-outline-secondary btn-login text-uppercase fw-bold mb-2"
                     routerLink="/sign-in">Sign in</button>
                 </div>
-
               </form>
             </div>
           </div>

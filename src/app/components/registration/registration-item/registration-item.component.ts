@@ -18,7 +18,7 @@ export class RegistrationItemComponent {
 
   unregisterFromEvent(registrationId: string): void {
     const userId = this.sessionStorageService.getItem('userId') || '';
-    this.registrationService.unregisterFromEvent(registrationId, userId).subscribe(
+    this.registrationService.deleteRegistration(registrationId, userId).subscribe(
       () => {
         this.unregisterSuccess.emit(registrationId);
       },

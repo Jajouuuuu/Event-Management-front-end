@@ -1,3 +1,4 @@
+<div class="page-wrapper">
 <app-top-bar></app-top-bar>
 <div class="container mt-4 event-details-container">
   <div *ngIf="event" class="row">
@@ -50,5 +51,6 @@
     </div>
   </div>
   <div><app-osm-map *ngIf="event && isFutureEvent" [location]="event.location"></app-osm-map></div>
+</div>
 </div>
 <app-footer></app-footer>

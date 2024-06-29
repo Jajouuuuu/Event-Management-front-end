@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EventService } from '../../../services/event.service';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../data/category';
-import Swal from 'sweetalert2';
+import { SwalService } from '../../../services/swal.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -17,7 +17,11 @@ export class SearchBarComponent implements OnInit {
 
   @Output() searchResults = new EventEmitter<any[]>();
 
-  constructor(private eventService: EventService, private categoryService: CategoryService) { }
+  constructor(
+    private eventService: EventService, 
+    private categoryService: CategoryService,
+    private swalService: SwalService // Injection du SwalService
+  ) { }
 
   ngOnInit(): void {
     this.loadCategories();
@@ -34,63 +38,61 @@ export class SearchBarComponent implements OnInit {
     );
   }
 
-  onSearch(): void {
+  onSearch(event?: Event): void {
+    if (event) {
+      event.preventDefault(); // Prevent default form submission
+    }
+    // Collect all search criteria
+    const searchParams: any = {};
     if (this.searchTitle) {
-      this.eventService.searchEvents(this.searchTitle).subscribe(
+      searchParams.title = this.searchTitle;
+    }
+    if (this.searchDate) {
+      // Ensure the date is fully entered (e.g., "YYYY-MM-DD" format)
+      if (this.searchDate.length === 10) {
+        searchParams.date = this.searchDate;
+      } else {
+        // Show alert for incomplete date
+        this.swalService.alert('Warning', 'Please enter a complete date.', 'warning');
+        return;
+      }
+    }
+    if (this.selectedCategory) {
+      searchParams.categoryId = this.selectedCategory;
+    }
+
+    // Only perform search if there are criteria specified
+    if (Object.keys(searchParams).length > 0) {
+      this.eventService.searchEvents(searchParams).subscribe(
         events => {
           this.handleSearchResults(events);
         },
         error => {
           if (error.status === 404) {
-            this.showNoResultsAlert();
+            this.swalService.showNoResultsAlert();
           } else {
             console.error('Error searching events:', error);
           }
         }
       );
-    } else if (this.searchDate) {
-      this.eventService.searchEventsByDate(this.searchDate).subscribe(
-        events => {
-          this.handleSearchResults(events);
-        },
-        error => {
-          if (error.status === 404) {
-            this.showNoResultsAlert();
-          } else {
-            console.error('Error searching events:', error);
-          }
-        }
-      );
-    } else if (this.selectedCategory) {
-      this.eventService.searchEventsByCategory(this.selectedCategory).subscribe(
-        events => {
-          this.handleSearchResults(events);
-        },
-        error => {
-          if (error.status === 404) {
-            this.showNoResultsAlert();
-          } else {
-            console.error('Error searching events:', error);
-          }
-        }
-      );
+    } else {
+      this.swalService.alert('Warning', 'Please enter search criteria.', 'warning');
     }
   }
 
   handleSearchResults(events: any[]): void {
     this.searchResults.emit(events);
     if (events.length === 0) {
-      this.showNoResultsAlert();
+      this.swalService.showNoResultsAlert();
     }
   }
 
-  showNoResultsAlert(): void {
-    Swal.fire({
-      icon: 'info',
-      title: 'No results found',
-      text: 'No events match your search criteria.',
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'OK'
-    });
+  resetFilters(): void {
+    this.searchTitle = '';
+    this.searchDate = '';
+    this.selectedCategory = '';
+    // Recharger la page si nécessaire
+    window.location.reload();
   }
+  
 }

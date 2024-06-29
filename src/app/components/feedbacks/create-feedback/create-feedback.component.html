@@ -1,31 +1,47 @@
-<app-top-bar></app-top-bar>
-
-<div class="container mt-3">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <hr class="w-25 mx-auto border-black">
-      <h3 class="inner-sans-serial-font">Ajouter un Feedback</h3>
-      <hr class="w-25 mx-auto border-black">
-      <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm" class="needs-validation" novalidate>
-        <div class="form-group">
-          <label for="rating">Note</label>
-          <input type="number" class="form-control" id="rating" name="rating" [(ngModel)]="rating" required
-            [ngClass]="{'is-invalid': feedbackForm.submitted && !ratingValid(), 'is-valid': feedbackForm.submitted && ratingValid()}">
-          <div class="invalid-feedback" *ngIf="feedbackForm.submitted && !ratingValid()">
-            La note est obligatoire et doit être un nombre.
+<div class="page-wrapper">
+  <app-top-bar></app-top-bar>
+  
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <hr class="w-25 mx-auto border-black">
+        <h3 class="inner-sans-serial-font">Ajouter un Feedback</h3>
+        <hr class="w-25 mx-auto border-black">
+        <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm" class="needs-validation" novalidate>
+          <div class="form-group">
+            <label for="rating">Note</label>
+            <input type="number" class="form-control"
+                   id="rating" name="rating"
+                   [(ngModel)]="rating"
+                   [ngClass]="{
+                     'form-control': true,
+                     'is-invalid': (feedbackForm.submitted || ratingTouched) && !ratingValid(),
+                     'is-valid': (feedbackForm.submitted || ratingTouched) && ratingValid()
+                   }"
+                   min="0" max="5" required (blur)="ratingTouched = true">
+            <div class="invalid-feedback" *ngIf="(feedbackForm.submitted || ratingTouched) && !ratingValid()">
+              La note est obligatoire et doit être un nombre entre 0 et 5.
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="comment">Commentaire</label>
-          <textarea class="form-control" id="comment" name="comment" [(ngModel)]="comment" required minlength="10"
-            maxlength="500"
-            [ngClass]="{'is-invalid': feedbackForm.submitted && !commentValid(), 'is-valid': feedbackForm.submitted && commentValid()}"></textarea>
-          <div class="invalid-feedback" *ngIf="feedbackForm.submitted && !commentValid()">
-            Le commentaire est obligatoire et doit avoir entre 10 et 500 caractères.
+          <div class="form-group">
+            <label for="comment">Commentaire</label>
+            <textarea class="form-control"
+                      id="comment" name="comment"
+                      [(ngModel)]="comment"
+                      [ngClass]="{
+                        'form-control': true,
+                        'is-invalid': (feedbackForm.submitted || commentTouched) && !commentValid(),
+                        'is-valid': (feedbackForm.submitted || commentTouched) && commentValid()
+                      }"
+                      required minlength="10" maxlength="500" (blur)="commentTouched = true"></textarea>
+            <div class="invalid-feedback" *ngIf="(feedbackForm.submitted || commentTouched) && !commentValid()">
+              Le commentaire est obligatoire et doit avoir entre 5 et 500 caractères.
+            </div>
           </div>
-        </div>
-        <button type="submit" class="btn btn-black" [disabled]="!feedbackForm.valid">Soumettre</button>
-      </form>
+          <button type="submit" class="btn btn-black" [disabled]="!feedbackForm.valid">Soumettre</button>
+          <button type="button" class="btn btn-outline-secondary ms-2" (click)="resetForm()">Réinitialiser</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

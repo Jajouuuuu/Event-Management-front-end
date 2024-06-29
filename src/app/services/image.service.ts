@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Image } from '../data/image';
 import { BaseService } from './base.service';
+import { SwalService } from './swal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class ImageService extends BaseService {
   private API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsY2ljZ25pbXZpcnVleHFjeXF2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNzY3Njk0NSwiZXhwIjoyMDMzMjUyOTQ1fQ.0Ky1mKiGWtVEVSN74nYlNn-brt4kzRDter0z5BI0mjI';
   private BEARER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsY2ljZ25pbXZpcnVleHFjeXF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc2NzY5NDUsImV4cCI6MjAzMzI1Mjk0NX0.l5g47cDE5HK9Qp_p7Cd5EV9zeQdBlvCYMesV6thVFxw';
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(private http: HttpClient, swalService: SwalService) {
+    super(swalService); // Appel du constructeur de BaseService avec SwalService
   }
 
   getFile(fileName: string): Observable<Blob> {

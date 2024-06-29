@@ -1,4 +1,3 @@
-// event-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../services/event.service';
@@ -53,14 +52,14 @@ export class EventListComponent implements OnInit {
         events => {
           this.events = events;
         },
-        error => console.error("Erreur lors de la récupération des événements :", error)
+        error => console.error("Erreur lors de la récupération des événements futurs :", error)
       );
     } else {
       this.eventService.getPastEventsByUserId(this.user.id).subscribe(
         events => {
           this.events = events;
         },
-        error => console.error("Erreur lors de la récupération des événements :", error)
+        error => console.error("Erreur lors de la récupération des événements passés :", error)
       );
     }
   }

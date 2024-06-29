@@ -8,13 +8,13 @@ import { User } from '../../../data/users';
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit {
-  user: User | undefined;
+  user!: User;
 
   constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
     const userId = sessionStorage.getItem('userId') || '';
-    this.userService.getCurrentUser(userId).subscribe(
+    this.userService.getUserById(userId).subscribe(
       (user: User) => this.user = user,
       error => console.error('Error fetching user information:', error)
     );
@@ -23,7 +23,7 @@ export class UserInfoComponent implements OnInit {
   updateUserInfo(): void {
     if (this.user) {
       const { id, email, username, password } = this.user;
-      this.userService.updateUserInfo(id, email, username, password).subscribe(
+      this.userService.updateUser(id, email, username, password).subscribe(
         () => alert('User information updated successfully'),
         (error) => console.error('Error updating user information', error)
       );

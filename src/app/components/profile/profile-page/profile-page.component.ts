@@ -7,6 +7,7 @@ import { RegistrationService } from '../../../services/registration.service';
 import { Registration } from '../../../data/registration';
 import { UsersService } from '../../../services/users.service';
 import { EventService } from '../../../services/event.service';
+import { SwalService } from '../../../services/swal.service'; // Assurez-vous d'importer le service SwalService
 
 @Component({
   selector: 'app-profile-page',
@@ -28,8 +29,9 @@ export class ProfilePageComponent implements OnInit {
     private registrationService: RegistrationService,
     private userService: UsersService,
     private sessionStorageService: SessionStorageService,
-    private router: Router, 
-    private eventService: EventService
+    private router: Router,
+    private eventService: EventService,
+    private swalService: SwalService // Injection du service SwalService
   ) { }
 
   ngOnInit(): void {
@@ -39,12 +41,24 @@ export class ProfilePageComponent implements OnInit {
         (user: User) => {
           this.user = user;
           this.loadUserRegistrations(userId);
+          this.loadEventsCreatedByUser(userId);
         },
         error => {
           console.error('Error fetching user:', error);
         }
       );
-    this.eventService.getEventsCreatedByUser(userId).subscribe(
+    }
+  }
+
+  loadUserRegistrations(userId: string): void {
+    this.registrationService.searchRegistrations({ userId: userId }).subscribe(
+      (registrations) => (this.registrations = registrations),
+      (error) => console.error('Error loading registrations', error)
+    );
+  }
+
+  loadEventsCreatedByUser(createdBy: string): void {
+    this.eventService.searchEvents({ createdById: createdBy }).subscribe(
       (events: Event[]) => {
         this.eventsCreatedByUser = events;
       },
@@ -53,25 +67,27 @@ export class ProfilePageComponent implements OnInit {
       }
     );
   }
-  }
-
-  loadUserRegistrations(userId: string): void {
-    this.registrationService.getRegistrationsByUserId(userId).subscribe(
-      (registrations) => (this.registrations = registrations),
-      (error) => console.error('Error loading registrations', error)
-    );
-  }
 
   deleteAccount(): void {
     if (this.user) {
       const userId = this.user.id;
-      this.userService.deleteUser(userId).subscribe(
-        () => {
-          this.sessionStorageService.clear();
-          this.router.navigate(['/sign-up']);
-        },
-        (error) => console.error('Error deleting account', error)
-      );
+      this.swalService.confirm('Confirmation', 'Êtes-vous sûr de vouloir supprimer votre compte ?')
+        .then((result) => {
+          if (result === true) {
+            this.userService.deleteUser(userId).subscribe(
+              () => {
+                this.swalService.success('Compte supprimé avec succès', 'Redirection dans 2 secondes');
+                setTimeout(() => {
+                  this.sessionStorageService.clear();
+                  this.router.navigate(['/sign-up']);
+                }, 2000);
+              },
+              (error) => {
+                this.swalService.error('Erreur lors de la suppression du compte', error.message ? error.message : 'Une erreur est survenue lors de la suppression du compte.');
+              }
+            );
+          }
+        });
     }
   }
 }

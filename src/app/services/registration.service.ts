@@ -3,36 +3,42 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Registration } from '../data/registration';
 import { BaseService } from './base.service';
+import { SwalService } from './swal.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService extends BaseService {
+
   private registrationsUrl = `${this.environmentUrl}registrations`;
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(private http: HttpClient, swalService: SwalService) {
+    super(swalService); // Appel du constructeur de BaseService avec SwalService
   }
 
-  getRegistrationsByEventId(eventId: string): Observable<Registration[]> {
-    return this.http.get<Registration[]>(`${this.registrationsUrl}/event/${eventId}`);
+  getAllRegistrations(): Observable<Registration[]> {
+    return this.http.get<Registration[]>(this.registrationsUrl);
   }
 
-  getRegistrationsByUserId(userId: string): Observable<Registration[]> {
-    return this.http.get<Registration[]>(`${this.registrationsUrl}/user/${userId}`);
+  searchRegistrations(params: { userId?: string, eventId?: string }): Observable<Registration[]> {
+    let url = `${this.registrationsUrl}/search`;
+    let queryParams = new URLSearchParams();
+    if (params.userId) {
+      queryParams.set('userId', params.userId);
+    }
+    if (params.eventId) {
+      queryParams.set('eventId', params.eventId);
+    }
+    url += '?' + queryParams.toString();
+
+    return this.http.get<Registration[]>(url);
   }
 
-  registerForEvent(eventId: string, userId: string): Observable<any> {
-    const url = `${this.registrationsUrl}`;
-    const payload = { eventId, userId };
-    return this.http.post(url, payload, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+  createRegistration(eventId: string, userId: string): Observable<Registration> {
+    return this.http.post<Registration>(this.registrationsUrl, {eventId, userId});
   }
 
-  unregisterFromEvent(registrationId: string, userId: string): Observable<any> {
+  deleteRegistration(registrationId: string, userId: string): Observable<void> {
     const url = `${this.registrationsUrl}/${registrationId}`;
     const options = {
       headers: new HttpHeaders({
@@ -40,6 +46,6 @@ export class RegistrationService extends BaseService {
         'userId': userId
       })
     };
-    return this.http.delete(url, options);
+    return this.http.delete<void>(url, options);
   }
 }
