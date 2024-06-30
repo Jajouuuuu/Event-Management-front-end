@@ -1,27 +1,35 @@
-# EventManagerFrontend
+# Application Angular pour la gestion d'événements
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
+## Fonctionnalités principales
 
-## Development server
+- **Inscription et connexion des utilisateurs**
+  - `UsersService` pour l'inscription, la connexion et la gestion des utilisateurs.
+  - Stockage des informations d'utilisateur dans `SessionStorageService`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Gestion des événements**
+  - `EventService` pour récupérer, créer, mettre à jour et supprimer des événements.
+  - `CategoryService` pour gérer les catégories d'événements.
 
-## Code scaffolding
+- **Inscriptions aux événements**
+  - `RegistrationService` pour gérer l'inscription des utilisateurs aux événements.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Réinitialisation de mot de passe**
+  - Utilisation de `SwalService` pour afficher des messages d'alerte.
+  - `UserService` pour la recherche d'utilisateurs par email et la réinitialisation du mot de passe.
 
-## Build
+## Configuration et installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Prérequis**
+   - Assurez-vous d'avoir Node.js et npm installés localement.
 
-## Running unit tests
+2. **Installation des dépendances**
+   ```bash
+   npm install 
+   ```
+## Utilisation
+Démarrez le serveur de développement avec ng serve.
+Ouvrez votre navigateur et accédez à http://localhost:4200/ pour voir l'application en action.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Auteur
+ 
+Jeanne-Emma Lefèvre
