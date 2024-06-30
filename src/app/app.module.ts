@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SigninComponent } from './components/sign-in/sign-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from './services/users.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { EventListItemComponent } from './components/events/event-list-item/event-list-item.component';
 import { EventService } from './services/event.service';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
@@ -34,17 +32,20 @@ import { OsmMapComponent } from './components/osm-map/osm-map.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BlobToImageDirective } from './services/blob-to-image.directive';
+import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
+import { SigninComponent } from './components/users/sign-in/sign-in.component';
+import { SignUpComponent } from './components/users/sign-up/sign-up.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    SigninComponent, 
-    SignUpComponent, 
-    EventListItemComponent, 
+    AppComponent,
+    SigninComponent,
+    SignUpComponent,
+    EventListItemComponent,
     EventDetailsComponent,
-    TopBarComponent, 
-    EventDetailsComponent, 
+    TopBarComponent,
+    EventDetailsComponent,
     RegistrationListComponent,
     RegistrationItemComponent,
     FeedbackComponent,
@@ -59,13 +60,14 @@ import { BlobToImageDirective } from './services/blob-to-image.directive';
     OsmMapComponent,
     UserInfoComponent,
     FooterComponent,
-    BlobToImageDirective 
+    BlobToImageDirective,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     HttpClientModule,
     RouterModule,
     MatIconModule,
@@ -74,8 +76,8 @@ import { BlobToImageDirective } from './services/blob-to-image.directive';
     UsersService,
     EventService,
     CategoryService,
-    ImageService, 
-    RegistrationService, 
+    ImageService,
+    RegistrationService,
     BaseService,
     provideAnimationsAsync(),
   ],

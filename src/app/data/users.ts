@@ -1,10 +1,9 @@
 export interface User {
-    id: string;
-    username: string;
-    email: string;
-    password: string;
-    createdAt: string;
-  }
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  createdAt: string;
+}
 
-  type UserNameOnly = Omit<User, 'password'>;
-  
+export type UserUpdate = Omit<User, 'id' | 'createdAt'>;

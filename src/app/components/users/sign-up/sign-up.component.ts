@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-
-import { User } from '../../data/users';
-import { UsersService } from '../../services/users.service';
 import { FormBuilder } from '@angular/forms';
-import { SwalService } from '../../services/swal.service';
 import { Router } from '@angular/router';
+import { User } from '../../../data/users';
+import { UsersService } from '../../../services/users.service';
+import { SwalService } from '../../../services/swal.service';
 
+/**
+ * Component for user sign-up functionality.
+ */
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -13,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent {
 
+  /** User object to store sign-up form data */
   user: User = {
     username: '',
     email: '',
@@ -28,6 +31,12 @@ export class SignUpComponent {
     private router: Router
   ) { }
 
+  /**
+   * Initiates the user sign-up process.
+   * Calls the UserService to create a new user with the provided details.
+   * Displays success message and navigates to sign-in page upon successful creation.
+   * Displays error message if user creation fails.
+   */
   signUp() {
     this.userService.createUser(this.user).subscribe(
       newUser => {
@@ -37,9 +46,8 @@ export class SignUpComponent {
       },
       error => {
         console.error('Erreur lors de la création de l\'utilisateur:', error);
-          this.swalService.error('Error', 'Failed to create user');
+        this.swalService.error('Error', 'Failed to create user');
       }
     );
   }
-
 }

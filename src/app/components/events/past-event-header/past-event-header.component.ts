@@ -1,4 +1,3 @@
-// past-events-header.component.ts
 import { Component, Input } from '@angular/core';
 import { User } from '../../../data/users';
 
@@ -15,5 +14,9 @@ import { User } from '../../../data/users';
   `
 })
 export class PastEventsHeaderComponent {
+  /**
+   * The user object containing user details
+   * @type {User}
+   */
   @Input() user!: User; 
 }

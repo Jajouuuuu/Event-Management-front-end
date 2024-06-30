@@ -12,10 +12,32 @@ import { SwalService } from '../../../services/swal.service';
   styleUrls: ['./event-list-item.component.css']
 })
 export class EventListItemComponent implements OnInit {
+  /**
+   * The event to be displayed in the list item
+   * @type {Event}
+   */
   @Input() event!: Event;
+
+  /**
+   * URL of the event image
+   * @type {string}
+   */
   imageUrl: string = '';
+
+  /**
+   * Flag to indicate if the current user is the owner of the event
+   * @type {boolean}
+   */
   isCurrentUserEventOwner: boolean = false;
 
+  /**
+   * Constructor for EventListItemComponent
+   * @param {ImageService} imageService - Service for image-related operations
+   * @param {Router} router - Service to navigate between routes
+   * @param {SessionStorageService} sessionStorageService - Service for session storage operations
+   * @param {EventService} eventService - Service for event-related operations
+   * @param {SwalService} swalService - Service for SweetAlert notifications
+   */
   constructor(
     private imageService: ImageService,
     private router: Router,
@@ -24,6 +46,9 @@ export class EventListItemComponent implements OnInit {
     private swalService: SwalService,
   ) { }
 
+  /**
+   * Lifecycle hook called on component initialization
+   */
   ngOnInit(): void {
     if (this.event && this.event.image) {
       this.fetchImage(this.event.image.url);
@@ -31,15 +56,26 @@ export class EventListItemComponent implements OnInit {
     this.checkCurrentUserEventOwner();
   }
 
+  /**
+   * Check if the current route is the profile page
+   * @returns {boolean} - True if the current route is '/profile'
+   */
   isProfilePage(): boolean {
     return this.router.url === '/profile';
   }
 
+  /**
+   * Check if the current user is the owner of the event
+   */
   checkCurrentUserEventOwner(): void {
     const currentUserId = this.sessionStorageService.getItem('userId');
     this.isCurrentUserEventOwner = this.event.createdBy.id === currentUserId;
   }
 
+  /**
+   * Fetch the image by file name and convert it to a data URL
+   * @param {string} fileName - The name of the file to fetch
+   */
   fetchImage(fileName: string): void {
     this.imageService.getFile(fileName).subscribe(
       (blob: Blob) => {
@@ -55,13 +91,15 @@ export class EventListItemComponent implements OnInit {
     );
   }
 
+  /**
+   * Delete the event with a confirmation dialog
+   */
   deleteEvent(): void {
     this.swalService.confirm('Confirmation', 'Are you sure you want to delete this event?').then((result) => {
       if (result) {
         this.eventService.deleteEvent(this.event.id).subscribe(
           () => {
             this.swalService.alert('Success', 'Event deleted successfully!', 'success').then(() => {
-              // Rediriger vers la page /profile après la suppression
               this.router.navigateByUrl('/profile');
             });
           },
@@ -71,7 +109,6 @@ export class EventListItemComponent implements OnInit {
           }
         );
       } else {
-        // L'utilisateur a cliqué sur "No" dans la boîte de dialogue de confirmation
         console.log('Deletion cancelled');
       }
     });

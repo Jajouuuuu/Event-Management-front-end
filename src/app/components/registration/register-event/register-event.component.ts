@@ -13,10 +13,34 @@ import { Event } from '../../../data/event';
   styleUrls: ['./register-event.component.css']
 })
 export class RegisterEventComponent implements OnInit {
+  /**
+   * Événement pour lequel l'utilisateur s'enregistre
+   * @type {Event | undefined}
+   */
   event?: Event;
+
+  /**
+   * ID de l'événement récupéré depuis les paramètres de l'URL
+   * @type {string}
+   */
   eventId!: string;
+
+  /**
+   * Liste des enregistrements pour cet événement
+   * @type {Registration[]}
+   */
   registrations: Registration[] = [];
+
+  /**
+   * Indique si l'utilisateur est déjà enregistré pour cet événement
+   * @type {boolean}
+   */
   isRegistered: boolean = false;
+
+  /**
+   * ID de l'utilisateur actuellement connecté
+   * @type {string}
+   */
   userId!: string;
 
   constructor(
@@ -36,6 +60,9 @@ export class RegisterEventComponent implements OnInit {
     }
   }
 
+  /**
+   * Récupère les détails de l'événement par son ID
+   */
   getEvent(): void {
     this.eventService.getEventById(this.eventId).subscribe(
       event => {
@@ -45,8 +72,11 @@ export class RegisterEventComponent implements OnInit {
     );
   }
 
+  /**
+   * Charge les inscriptions pour cet événement et vérifie si l'utilisateur est déjà inscrit
+   */
   loadRegistrations() {
-    this.registrationService.searchRegistrations({ eventId: this.eventId})
+    this.registrationService.searchRegistrations({ eventId: this.eventId })
       .subscribe(registrations => {
         this.registrations = registrations;
         const currentUserId = this.userId;
@@ -54,6 +84,9 @@ export class RegisterEventComponent implements OnInit {
       });
   }
 
+  /**
+   * Enregistre l'utilisateur pour cet événement
+   */
   registerForEvent() {
     if (this.userId) {
       this.registrationService.createRegistration(this.eventId, this.userId)
@@ -64,6 +97,10 @@ export class RegisterEventComponent implements OnInit {
     }
   }
 
+  /**
+   * Désinscrit l'utilisateur de cet événement
+   * @param {string} registrationId - ID de l'inscription à supprimer
+   */
   unregisterFromEvent(registrationId: string) {
     const userId = this.sessionStorageService.getItem('userId') || '';
     this.registrationService.deleteRegistration(registrationId, userId)
@@ -72,5 +109,4 @@ export class RegisterEventComponent implements OnInit {
         this.loadRegistrations();
       });
   }
-
 }

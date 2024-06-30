@@ -12,10 +12,32 @@ import { Event } from '../../../data/event';
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
+  /**
+   * List of events to be displayed
+   * @type {Event[]}
+   */
   events: Event[] = [];
+
+  /**
+   * The current user
+   * @type {User}
+   */
   user!: User;
+
+  /**
+   * Type of events to display (either 'future' or 'past')
+   * @type {'future' | 'past'}
+   */
   eventType: 'future' | 'past' = 'future';
 
+  /**
+   * Constructor for EventListComponent
+   * @param {ActivatedRoute} route - Service to access route parameters
+   * @param {EventService} eventService - Service for event-related operations
+   * @param {SessionStorageService} sessionStorageService - Service for session storage operations
+   * @param {UsersService} userService - Service for user-related operations
+   * @param {Router} router - Service to navigate between routes
+   */
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
@@ -24,6 +46,9 @@ export class EventListComponent implements OnInit {
     private router: Router
   ) { }
 
+  /**
+   * Lifecycle hook called on component initialization
+   */
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.eventType = params.get('eventType') as 'future' | 'past';
@@ -31,6 +56,9 @@ export class EventListComponent implements OnInit {
     });
   }
 
+  /**
+   * Load the current user and their events based on the event type
+   */
   loadUserAndEvents(): void {
     const userId = this.sessionStorageService.getItem('userId');
     if (userId) {
@@ -46,6 +74,9 @@ export class EventListComponent implements OnInit {
     }
   }
 
+  /**
+   * Fetch events based on the event type
+   */
   getEvents(): void {
     if (this.eventType === 'future') {
       this.eventService.getFutureEvents().subscribe(
@@ -64,10 +95,17 @@ export class EventListComponent implements OnInit {
     }
   }
 
+  /**
+   * Update the list of events displayed
+   * @param {Event[]} events - The new list of events to display
+   */
   updateEvents(events: Event[]): void {
     this.events = events;
   }
 
+  /**
+   * Redirect to the create event page
+   */
   redirectToCreateEvent(): void {
     this.router.navigate(['/create-event']);
   }

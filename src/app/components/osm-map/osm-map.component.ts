@@ -7,17 +7,36 @@ import * as L from 'leaflet';
   styleUrls: ['./osm-map.component.css']
 })
 export class OsmMapComponent implements OnInit {
+  /**
+   * Location address to be geocoded and displayed on the map
+   * @type {string}
+   */
   @Input() location: string = '';
 
+  /**
+   * Leaflet map instance
+   * @type {L.Map}
+   */
   map!: L.Map;
+
+  /**
+   * Leaflet marker instance
+   * @type {L.Marker}
+   */
   marker!: L.Marker;
 
   constructor() { }
 
+  /**
+   * Lifecycle hook that is called after data-bound properties are initialized
+   */
   ngOnInit(): void {
     this.initializeMap();
   }
 
+  /**
+   * Initializes the Leaflet map with default settings and tile layer
+   */
   initializeMap(): void {
     const defaultCoordinates: L.LatLngExpression = [48.8566, 2.3522];
 
@@ -35,6 +54,10 @@ export class OsmMapComponent implements OnInit {
     }
   }
 
+  /**
+   * Geocodes the provided address and updates the map view and marker position accordingly
+   * @param {string} address - Address to geocode
+   */
   geocodeLocation(address: string): void {
     const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`;
 
@@ -50,11 +73,11 @@ export class OsmMapComponent implements OnInit {
           }
           this.marker = L.marker(latLng).addTo(this.map);
         } else {
-          console.error('Adresse non trouvée : ', address);
+          console.error('Address not found:', address);
         }
       })
       .catch(error => {
-        console.error('Erreur de géocodage : ', error);
+        console.error('Geocoding error:', error);
       });
   }
 }

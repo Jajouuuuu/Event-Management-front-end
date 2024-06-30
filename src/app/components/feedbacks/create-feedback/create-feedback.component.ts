@@ -3,7 +3,6 @@ import { FeedbackService } from '../../../services/feedback.services';
 import { SessionStorageService } from '../../../services/session-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SwalService } from '../../../services/swal.service';
-import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-feedback',
@@ -11,11 +10,35 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./create-feedback.component.css']
 })
 export class CreateFeedbackComponent {
+  /**
+   * ID of the event for which feedback is being created
+   * @type {string}
+   */
   eventId: string = '';
+
+  /**
+   * Rating given by the user
+   * @type {number}
+   */
   rating: number = 0;
+
+  /**
+   * Comment provided by the user
+   * @type {string}
+   */
   comment: string = '';
+
+  /**
+   * Flag indicating whether the rating input has been touched
+   * @type {boolean}
+   */
   ratingTouched: boolean = false;
-  commentTouched: boolean = false; 
+
+  /**
+   * Flag indicating whether the comment input has been touched
+   * @type {boolean}
+   */
+  commentTouched: boolean = false;
 
   constructor(
     private feedbackService: FeedbackService,
@@ -25,10 +48,13 @@ export class CreateFeedbackComponent {
     private swalService: SwalService
   ) { }
 
+  /**
+   * Submits the feedback form
+   */
   onSubmit(): void {
     this.eventId = this.route.snapshot.paramMap.get('eventId')!;
     const userId = this.sessionStorageService.getItem('userId');
-    
+
     if (this.ratingValid() && this.commentValid()) {
       const feedbackDTO = {
         eventId: this.eventId,
@@ -39,7 +65,7 @@ export class CreateFeedbackComponent {
 
       this.feedbackService.addFeedback(feedbackDTO).subscribe(
         response => {
-          console.log('Feedback ajouté avec succès', response); 
+          console.log('Feedback ajouté avec succès', response);
           this.resetForm();
           this.swalService.success('Feedback ajouté avec succès!', 'Bravo vous avez bien ajouté votre feedback !');
           setTimeout(() => {
@@ -56,17 +82,28 @@ export class CreateFeedbackComponent {
     }
   }
 
+  /**
+   * Resets the feedback form
+   */
   resetForm(): void {
     this.rating = 0;
     this.comment = '';
     this.ratingTouched = false;
-    this.commentTouched = false; 
+    this.commentTouched = false;
   }
 
+  /**
+   * Validates the rating input
+   * @returns {boolean} - Whether the rating is valid
+   */
   ratingValid(): boolean {
     return this.rating !== null && !isNaN(this.rating) && this.rating >= 0 && this.rating <= 5;
   }
 
+  /**
+   * Validates the comment input
+   * @returns {boolean} - Whether the comment is valid
+   */
   commentValid(): boolean {
     return this.comment.length >= 5 && this.comment.length <= 500;
   }

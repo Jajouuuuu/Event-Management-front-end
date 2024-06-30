@@ -14,5 +14,9 @@ import { User } from '../../../data/users';
   `
 })
 export class FutureEventsHeaderComponent {
+  /**
+   * The user object containing user details
+   * @type {User}
+   */
   @Input() user!: User;
 }

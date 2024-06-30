@@ -10,8 +10,8 @@ describe('PastEventsHeaderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [PastEventsHeaderComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PastEventsHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

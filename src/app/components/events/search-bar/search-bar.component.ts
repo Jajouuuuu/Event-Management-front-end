@@ -10,23 +10,52 @@ import { SwalService } from '../../../services/swal.service';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
+  /**
+   * The title to search for
+   * @type {string}
+   */
   searchTitle: string = '';
+
+  /**
+   * The date to search for
+   * @type {string}
+   */
   searchDate: string = '';
+
+  /**
+   * The selected category ID to search for
+   * @type {string}
+   */
   selectedCategory: string = '';
+
+  /**
+   * The list of available categories
+   * @type {Category[]}
+   */
   categories: Category[] = [];
 
+  /**
+   * Emits the search results to parent component
+   * @type {EventEmitter<any[]>}
+   */
   @Output() searchResults = new EventEmitter<any[]>();
 
   constructor(
     private eventService: EventService, 
     private categoryService: CategoryService,
-    private swalService: SwalService // Injection du SwalService
+    private swalService: SwalService
   ) { }
 
+  /**
+   * Lifecycle hook that is called after data-bound properties are initialized
+   */
   ngOnInit(): void {
     this.loadCategories();
   }
 
+  /**
+   * Loads the categories from the service
+   */
   loadCategories(): void {
     this.categoryService.getCategories().subscribe(
       categories => {
@@ -38,21 +67,22 @@ export class SearchBarComponent implements OnInit {
     );
   }
 
+  /**
+   * Performs search based on entered criteria
+   * @param {Event} [event] - The event triggered by form submission
+   */
   onSearch(event?: Event): void {
     if (event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault();
     }
-    // Collect all search criteria
     const searchParams: any = {};
     if (this.searchTitle) {
       searchParams.title = this.searchTitle;
     }
     if (this.searchDate) {
-      // Ensure the date is fully entered (e.g., "YYYY-MM-DD" format)
       if (this.searchDate.length === 10) {
         searchParams.date = this.searchDate;
       } else {
-        // Show alert for incomplete date
         this.swalService.alert('Warning', 'Please enter a complete date.', 'warning');
         return;
       }
@@ -60,8 +90,6 @@ export class SearchBarComponent implements OnInit {
     if (this.selectedCategory) {
       searchParams.categoryId = this.selectedCategory;
     }
-
-    // Only perform search if there are criteria specified
     if (Object.keys(searchParams).length > 0) {
       this.eventService.searchEvents(searchParams).subscribe(
         events => {
@@ -80,6 +108,10 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
+  /**
+   * Handles the search results and emits them to the parent component
+   * @param {any[]} events - The search results
+   */
   handleSearchResults(events: any[]): void {
     this.searchResults.emit(events);
     if (events.length === 0) {
@@ -87,12 +119,13 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
+  /**
+   * Resets all the search filters and reloads the page
+   */
   resetFilters(): void {
     this.searchTitle = '';
     this.searchDate = '';
     this.selectedCategory = '';
-    // Recharger la page si nécessaire
     window.location.reload();
   }
-  
 }

@@ -12,10 +12,32 @@ import { SwalService } from '../../../services/swal.service';
   styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent implements OnInit {
+  /**
+   * Form group for creating an event
+   * @type {FormGroup}
+   */
   createEventForm: FormGroup;
+
+  /**
+   * List of categories available for the event
+   * @type {Category[]}
+   */
   categories: Category[] = [];
+
+  /**
+   * The selected file to be uploaded with the event
+   * @type {File | null}
+   */
   selectedFile: File | null = null;
 
+  /**
+   * Constructor for CreateEventComponent
+   * @param {FormBuilder} fb - Form builder service for reactive forms
+   * @param {EventService} eventService - Service for event-related operations
+   * @param {SessionStorageService} sessionStorageService - Service for session storage operations
+   * @param {CategoryService} categoryService - Service for category-related operations
+   * @param {SwalService} swalService - Service for displaying Swal alerts
+   */
   constructor(
     private fb: FormBuilder,
     private eventService: EventService,
@@ -33,24 +55,37 @@ export class CreateEventComponent implements OnInit {
     });
   }
 
+  /**
+   * Lifecycle hook called on component initialization
+   */
   ngOnInit(): void {
     this.loadCategories();
   }
 
-  loadCategories() {
+  /**
+   * Load the categories from the service
+   */
+  loadCategories(): void {
     this.categoryService.getCategories().subscribe(categories => {
       this.categories = categories;
     });
   }
 
-  onFileChange(event: Event) {
+  /**
+   * Handle the file input change event
+   * @param {Event} event - The file input change event
+   */
+  onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input && input.files && input.files.length) {
       this.selectedFile = input.files[0];
     }
   }
 
-  onSubmit() {
+  /**
+   * Handle form submission to create an event
+   */
+  onSubmit(): void {
     const userId = this.sessionStorageService.getItem('userId');
     const createdAt = new Date().toISOString();
     const formValues = this.createEventForm.value;

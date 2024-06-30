@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <app-top-bar></app-top-bar>
-  
+
   <div class="container mt-3">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -10,30 +10,22 @@
         <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm" class="needs-validation" novalidate>
           <div class="form-group">
             <label for="rating">Note</label>
-            <input type="number" class="form-control"
-                   id="rating" name="rating"
-                   [(ngModel)]="rating"
-                   [ngClass]="{
+            <input type="number" class="form-control" id="rating" name="rating" [(ngModel)]="rating" [ngClass]="{
                      'form-control': true,
                      'is-invalid': (feedbackForm.submitted || ratingTouched) && !ratingValid(),
                      'is-valid': (feedbackForm.submitted || ratingTouched) && ratingValid()
-                   }"
-                   min="0" max="5" required (blur)="ratingTouched = true">
+                   }" min="0" max="5" required (blur)="ratingTouched = true">
             <div class="invalid-feedback" *ngIf="(feedbackForm.submitted || ratingTouched) && !ratingValid()">
               La note est obligatoire et doit être un nombre entre 0 et 5.
             </div>
           </div>
           <div class="form-group">
             <label for="comment">Commentaire</label>
-            <textarea class="form-control"
-                      id="comment" name="comment"
-                      [(ngModel)]="comment"
-                      [ngClass]="{
+            <textarea class="form-control" id="comment" name="comment" [(ngModel)]="comment" [ngClass]="{
                         'form-control': true,
                         'is-invalid': (feedbackForm.submitted || commentTouched) && !commentValid(),
                         'is-valid': (feedbackForm.submitted || commentTouched) && commentValid()
-                      }"
-                      required minlength="10" maxlength="500" (blur)="commentTouched = true"></textarea>
+                      }" required minlength="10" maxlength="500" (blur)="commentTouched = true"></textarea>
             <div class="invalid-feedback" *ngIf="(feedbackForm.submitted || commentTouched) && !commentValid()">
               Le commentaire est obligatoire et doit avoir entre 5 et 500 caractères.
             </div>

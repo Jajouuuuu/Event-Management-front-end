@@ -9,14 +9,31 @@ import { Router } from '@angular/router';
     styleUrls: ['./feedback-list.component.css']
 })
 export class FeedbackComponent implements OnInit {
-    @Input() eventId?: string; 
+    /**
+     * ID of the event for which feedbacks are being displayed
+     * @type {string}
+     */
+    @Input() eventId?: string;
+
+    /**
+     * List of feedbacks for the event
+     * @type {Feedback[]}
+     */
     feedbacks: Feedback[] = [];
 
+    /**
+     * Constructs the FeedbackComponent
+     * @param {FeedbackService} feedbackService - Service to handle feedback related operations
+     * @param {Router} router - Router for navigation
+     */
     constructor(private feedbackService: FeedbackService, private router: Router) { }
 
+    /**
+     * Lifecycle hook that is called after data-bound properties are initialized
+     */
     ngOnInit(): void {
         if (this.eventId) {
-            this.feedbackService.searchFeedbacks({eventId :this.eventId}).subscribe(
+            this.feedbackService.searchFeedbacks({ eventId: this.eventId }).subscribe(
                 feedbacks => this.feedbacks = feedbacks,
                 error => console.error('Error loading feedbacks', error)
             );
@@ -25,6 +42,9 @@ export class FeedbackComponent implements OnInit {
         }
     }
 
+    /**
+     * Navigates to the create feedback page
+     */
     navigateToCreateFeedback(): void {
         this.router.navigate(['/feedbacks/create']);
     }

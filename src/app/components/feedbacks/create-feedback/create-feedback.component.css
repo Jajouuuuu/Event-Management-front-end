@@ -28,5 +28,5 @@
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Hauteur minimale de la vue */
-  }
+    min-height: 100vh;
+}

@@ -1,7 +1,6 @@
 .footer {
   position: relative;
-  
-  background-color: #f8f9fa; /* Couleur de fond */
-  padding: 10px; /* Espacement intérieur */
-  text-align: center; /* Alignement du texte */
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
 }

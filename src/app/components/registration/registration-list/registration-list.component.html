@@ -1,5 +1,5 @@
 <h3>My Registrations</h3>
-  <ul class="list-group">
-    <registration-item *ngFor="let registration of registrations" [registration]="registration" (unregisterSuccess)="handleUnregisterSuccess(registration.registrationId)"></registration-item>
-  </ul>
-
+<ul class="list-group">
+  <registration-item *ngFor="let registration of registrations" [registration]="registration"
+    (unregisterSuccess)="handleUnregisterSuccess(registration.registrationId)"></registration-item>
+</ul>

@@ -12,8 +12,8 @@ h3 {
 .btn-primary {
     background-color: black;
     border-color: black;
-    display: block; 
-    margin: 0 auto; 
+    display: block;
+    margin: 0 auto;
 }
 
 .btn-primary:hover {
@@ -34,5 +34,5 @@ h3 {
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Hauteur minimale de la vue */
-  }
+    min-height: 100vh;
+}

@@ -6,48 +6,72 @@ import { BaseService } from './base.service';
 import { Event } from "../data/event";
 import { SwalService } from './swal.service';
 
+/**
+ * Service to handle CRUD operations for events.
+ * Extends BaseService to handle common error handling.
+ */
 @Injectable()
 export class EventService extends BaseService {
 
+  /** URL for events API endpoint */
   private eventsUrl = `${this.environmentUrl}events`;
 
   constructor(private http: HttpClient, swalService: SwalService) {
-    super(swalService); // Appel du constructeur de BaseService avec SwalService
+    super(swalService); // Calls the constructor of BaseService with SwalService injection
   }
 
-  // Récupérer tous les événements
+  /**
+   * Fetches all events.
+   * @returns An Observable array of Event objects
+   */
   getEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.eventsUrl).pipe(
       catchError(this.handleError<any>('getEvents'))
     );
   }
 
-  // Récupérer un événement par son ID
+  /**
+   * Fetches an event by its ID.
+   * @param eventId The ID of the event to fetch
+   * @returns An Observable of Event
+   */
   getEventById(eventId: string): Observable<Event> {
     return this.http.get<Event>(`${this.eventsUrl}/${eventId}`).pipe(
       catchError(this.handleError<any>('getEvents'))
     );
   }
 
-  // Récupérer les événements futurs
+  /**
+   * Fetches future events.
+   * @returns An Observable array of future Event objects
+   */
   getFutureEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.eventsUrl}/filter?type=future`).pipe(
       catchError(this.handleError<any>('getFutureEvents'))
     );
   }
 
-  // Récupérer les événements passés par ID utilisateur
+  /**
+   * Fetches past events by user ID.
+   * @param userId The ID of the user whose past events to fetch
+   * @returns An Observable array of past Event objects
+   */
   getPastEventsByUserId(userId: string): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.eventsUrl}/filter?type=past&userId=${userId}`).pipe(
       catchError(this.handleError<any>('getPastEventsByUserId'))
     );
   }
 
-  // Créer un événement
+  /**
+   * Creates an event.
+   * @param eventDTO The event data to create
+   * @param file The file associated with the event (e.g., image)
+   * @returns An Observable<any> for the HTTP POST request
+   */
   createEvent(eventDTO: any, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);
-    formData.append('eventDTO', new Blob([JSON.stringify(eventDTO)], { type: 'application/json' })); // Ajout des données JSON à FormData
+    formData.append('eventDTO', new Blob([JSON.stringify(eventDTO)], { type: 'application/json' }));
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
@@ -56,8 +80,12 @@ export class EventService extends BaseService {
       catchError(this.handleError<any>('createEvent'))
     );
   }
-  
-  // Rechercher des événements avec des paramètres de filtre (titre, lieu, date, catégorie, créateur)
+
+  /**
+   * Searches events with optional filter parameters.
+   * @param params Object containing filter parameters: title, location, date, categoryId, createdById
+   * @returns An Observable array of Event objects matching the search criteria
+   */
   searchEvents(params: { title?: string, location?: string, date?: string, categoryId?: string, createdById?: string }): Observable<Event[]> {
     let url = `${this.eventsUrl}/search`;
     let queryParams = new HttpParams();
@@ -83,7 +111,11 @@ export class EventService extends BaseService {
     );
   }
 
-  // Supprimer un événement par son ID
+  /**
+   * Deletes an event by its ID.
+   * @param eventId The ID of the event to delete
+   * @returns An Observable<void> for the HTTP DELETE request
+   */
   deleteEvent(eventId: string): Observable<void> {
     const url = `${this.eventsUrl}/${eventId}`;
     return this.http.delete<void>(url);
