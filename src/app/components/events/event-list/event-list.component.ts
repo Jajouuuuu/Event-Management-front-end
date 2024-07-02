@@ -88,6 +88,7 @@ export class EventListComponent implements OnInit {
     } else {
       this.eventService.getPastEventsByUserId(this.user.id).subscribe(
         events => {
+          console.log(events)
           this.events = events;
         },
         error => console.error("Erreur lors de la récupération des événements passés :", error)

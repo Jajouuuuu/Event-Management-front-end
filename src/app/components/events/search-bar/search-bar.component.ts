@@ -29,6 +29,12 @@ export class SearchBarComponent implements OnInit {
   selectedCategory: string = '';
 
   /**
+   * The location to search for
+   * @type {string}
+   */
+  searchLocation: string = '';
+
+  /**
    * The list of available categories
    * @type {Category[]}
    */
@@ -75,25 +81,47 @@ export class SearchBarComponent implements OnInit {
     if (event) {
       event.preventDefault();
     }
+
     const searchParams: any = {};
+
     if (this.searchTitle) {
       searchParams.title = this.searchTitle;
     }
+
     if (this.searchDate) {
       if (this.searchDate.length === 10) {
-        searchParams.date = this.searchDate;
+        const dateParts = this.searchDate.split('-');
+        if (dateParts.length === 3) {
+          const year = dateParts[0];
+          const month = dateParts[1].padStart(2, '0');
+          const day = dateParts[2].padStart(2, '0');
+          searchParams.date = `${year}-${month}-${day}`;
+        } else {
+          this.swalService.alert('Warning', 'Please enter a valid date in YYYY-MM-DD format.', 'warning');
+          return;
+        }
       } else {
         this.swalService.alert('Warning', 'Please enter a complete date.', 'warning');
         return;
       }
     }
+
+    if (this.searchLocation) {
+      searchParams.location = this.searchLocation; // Ajout de la localisation dans les paramètres de recherche
+    }
+
     if (this.selectedCategory) {
       searchParams.categoryId = this.selectedCategory;
     }
+
+    const currentDate = new Date().toISOString().split('T')[0];
+    searchParams.currentDate = currentDate;
+
     if (Object.keys(searchParams).length > 0) {
       this.eventService.searchEvents(searchParams).subscribe(
         events => {
-          this.handleSearchResults(events);
+          const filteredEvents = events.filter(event => event.dateTime >= currentDate);
+          this.handleSearchResults(filteredEvents);
         },
         error => {
           if (error.status === 404) {

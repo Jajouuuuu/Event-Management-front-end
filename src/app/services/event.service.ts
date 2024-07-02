@@ -96,7 +96,7 @@ export class EventService extends BaseService {
       queryParams = queryParams.set('location', params.location);
     }
     if (params.date) {
-      queryParams = queryParams.set('date', params.date);
+      queryParams = queryParams.set('dateTime', params.date);
     }
     if (params.categoryId) {
       queryParams = queryParams.set('categoryId', params.categoryId);
