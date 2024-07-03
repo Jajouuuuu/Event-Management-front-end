@@ -107,7 +107,7 @@ export class SearchBarComponent implements OnInit {
     }
 
     if (this.searchLocation) {
-      searchParams.location = this.searchLocation; // Ajout de la localisation dans les paramètres de recherche
+      searchParams.location = this.searchLocation;
     }
 
     if (this.selectedCategory) {
